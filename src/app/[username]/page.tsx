@@ -1,0 +1,104 @@
+import { createClient } from "@/lib/supabase/server";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+interface ProfilePageProps {
+    params: Promise<{
+        username: string;
+    }>;
+}
+
+export async function generateMetadata({
+    params,
+}: ProfilePageProps): Promise<Metadata> {
+    const { username } = await params;
+    const supabase = await createClient();
+
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("display_name, bio")
+        .eq("slug", username)
+        .single();
+
+    if (!profile) return { title: "Profile Not Found" };
+
+    return {
+        title: `${profile.display_name} | Canvas`,
+        description: profile.bio,
+    };
+}
+
+export default async function ProfilePage({ params }: ProfilePageProps) {
+    const { username } = await params;
+    const supabase = await createClient();
+
+    // 1. Fetch Profile
+    const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("slug", username)
+        .single();
+
+    if (profileError || !profile) {
+        notFound();
+    }
+
+    // 2. Fetch Blocks
+    const { data: blocks, error: blocksError } = await supabase
+        .from("blocks")
+        .select("*")
+        .eq("profile_id", profile.id)
+        .eq("is_visible", true)
+        .order("sort_order", { ascending: true });
+
+    return (
+        <main className="min-h-screen bg-slate-950 text-slate-50" style={{ "--accent-brand": profile.accent_color || "var(--accent-color)" } as React.CSSProperties}>
+            <div className="max-w-2xl mx-auto px-4 py-12 md:py-20 space-y-12">
+                {/* Profile Header */}
+                <header className="text-center space-y-4">
+                    <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto flex items-center justify-center border-2 border-accent-brand overflow-hidden shadow-glow transition-all duration-500">
+                        {profile.avatar_url ? (
+                            <img src={profile.avatar_url} alt={profile.display_name} className="w-full h-full object-cover" />
+                        ) : (
+                            <span className="text-3xl font-bold text-slate-400">
+                                {profile.display_name.charAt(0)}
+                            </span>
+                        )}
+                    </div>
+                    <div className="space-y-2">
+                        <h1 className="text-3xl font-bold tracking-tight">{profile.display_name}</h1>
+                        <p className="text-slate-400 max-w-sm mx-auto">{profile.bio}</p>
+                    </div>
+                </header>
+
+                {/* Blocks Area */}
+                <section className="space-y-6">
+                    {blocks && blocks.length > 0 ? (
+                        blocks.map((block) => (
+                            <div key={block.id} className="p-6 rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-all hover:border-slate-700">
+                                <pre className="text-xs text-slate-500 overflow-auto whitespace-pre-wrap">
+                                    {JSON.stringify(block.data, null, 2)}
+                                </pre>
+                                <div className="mt-2 text-[10px] uppercase tracking-widest text-slate-600 font-bold">
+                                    {block.type} BLOCK
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center py-12 border-2 border-dashed border-slate-800 rounded-3xl text-slate-500">
+                            No blocks added to this canvas yet.
+                        </div>
+                    )}
+                </section>
+
+                {/* Footer */}
+                <footer className="pt-12 text-center">
+                    <a href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-slate-800" />
+                        Created with Canvas
+                    </a>
+                </footer>
+            </div>
+        </main>
+    );
+}
