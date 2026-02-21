@@ -15,11 +15,14 @@
 
 ### Phase 1: Foundation & Identity
 **Status**: ⬜ Not Started
-**Objective**: Set up the core project structure, database schema, and dynamic routing.
+**Objective**: Set up the core project structure, auth, database schema, and dynamic routing.
 - Initialize Next.js project with Tailwind and shadcn/ui.
-- Supabase integration (Client, Auth, Database).
-- Schema: `profiles` table (slug, bio, colors) and `blocks` table (type, data, order).
-- Implementation of the dynamic `/[username]` page.
+- Supabase integration (Client, Auth, Database, RLS).
+- Schema: `profiles` table (linked to `auth.uid()`) and `blocks` table (`JSONB` data).
+- Auth plumbing: sign-up/login pages, middleware for protected routes.
+- Minimal landing page at `/` with "Get Started" CTA.
+- Dynamic `/[username]` route with reserved slugs validation.
+- Seed demo profile with sample blocks for visual testing.
 
 ### Phase 2: The Canvas Ecosystem (Blocks)
 **Status**: ⬜ Not Started
@@ -32,7 +35,6 @@
 ### Phase 3: The Profile Editor
 **Status**: ⬜ Not Started
 **Objective**: Create the authenticated dashboard where users manage their identity.
-- Sign-up/Login flow via Supabase.
 - Live-preview editor (add, remove, reorder blocks).
 - Appearance settings (Accent Color, slug management).
 
