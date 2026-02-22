@@ -49,3 +49,10 @@
 - Framer Motion animations (entry/exit transitions).
 - Performance optimization (Image optimization, hydration checks).
 - Final mobile-first responsiveness audit.
+
+### Phase 5: Gap Closure & Documentation
+**Status**: ⬜ Not Started
+**Objective**: Address gaps from milestone audit and consolidate project records.
+- Consolidate Phase 1 & 3 verification reports into `.gsd/phases/`.
+- Implement drag-and-drop reordering for blocks (UX refinement).
+- Verify hydration consistency for dynamic accent colors.

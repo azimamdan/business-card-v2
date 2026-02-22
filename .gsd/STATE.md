@@ -18,8 +18,14 @@
 - Implemented Live Preview replicating `/[username]/page.tsx` within the dashboard.
 - Verified build succeeds with zero errors.
 
+## Gap Closure Mode
+Addressing 2 critical identification gaps from milestone audit (documentation & UX debt).
+- **Consolidation**: Moving verification logs from brain/session roots to `.gsd/phases/`.
+- **UX Fix**: Drag-and-Drop reordering.
+
 ## In-Progress Work
-- Phase 3 execution complete. Ready for `/verify 3`.
+- Creating gap closure plans for Phase 5.
+- Phase 3 verification is acknowledged but documentation needs consolidation.
 
 ## Blockers
 - None.
