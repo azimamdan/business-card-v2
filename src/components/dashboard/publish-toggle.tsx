@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function PublishToggle({ profile }: { profile: Profile }) {
     const [isPublished, setIsPublished] = useState(profile.is_published);
@@ -54,7 +55,10 @@ export function PublishToggle({ profile }: { profile: Profile }) {
                         <Label htmlFor="publish-mode" className="text-base font-medium">Profile Status</Label>
                         <span className="relative flex h-2.5 w-2.5">
                             {isPublished && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>}
-                            <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isPublished ? 'bg-green-500' : 'bg-yellow-500'}`}></span>
+                            <motion.span
+                                layoutId="status-dot"
+                                className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isPublished ? 'bg-green-500' : 'bg-yellow-500'}`}
+                            ></motion.span>
                         </span>
                     </div>
                     <p className="text-sm text-slate-400">

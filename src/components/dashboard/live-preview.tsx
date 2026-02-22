@@ -2,6 +2,7 @@
 
 import { Profile, Block } from "@/lib/types/database";
 import { BlockRenderer } from "@/components/canvas/block-renderer";
+import Image from "next/image";
 
 interface LivePreviewProps {
     profile: Profile;
@@ -39,14 +40,18 @@ export function LivePreview({ profile, blocks }: LivePreviewProps) {
                     {/* Header mirrored from /[username]/page.tsx */}
                     <header className="mb-12 pt-10 flex flex-col items-center text-center px-4">
                         {profile.avatar_url ? (
-                            <img
-                                src={profile.avatar_url}
-                                alt={profile.display_name}
-                                className="w-24 h-24 rounded-full border-2 border-accent-brand object-cover mb-6 shadow-glow"
-                            />
+                            <div className="relative w-24 h-24 rounded-full border-2 border-[var(--accent-brand)] overflow-hidden mb-6 shadow-glow">
+                                <Image
+                                    src={profile.avatar_url}
+                                    alt={profile.display_name}
+                                    fill
+                                    sizes="96px"
+                                    className="object-cover"
+                                />
+                            </div>
                         ) : (
-                            <div className="w-24 h-24 rounded-full border-2 border-accent-brand bg-slate-900 flex items-center justify-center mb-6 shadow-glow">
-                                <span className="text-3xl font-bold text-accent-brand">
+                            <div className="w-24 h-24 rounded-full border-2 border-[var(--accent-brand)] bg-slate-900 flex items-center justify-center mb-6 shadow-glow">
+                                <span className="text-3xl font-bold text-[var(--accent-brand)]">
                                     {profile.display_name.charAt(0)}
                                 </span>
                             </div>

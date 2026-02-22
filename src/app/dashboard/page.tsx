@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -17,6 +16,7 @@ import { BlockList } from "@/components/dashboard/block-list";
 import { LivePreview } from "@/components/dashboard/live-preview";
 import { CopyLinkButton } from "@/components/dashboard/copy-link-button";
 import { SetupForm } from "@/components/dashboard/setup-form";
+import { DashboardMobileTabs } from "@/components/dashboard/mobile-tabs";
 
 export default async function DashboardPage() {
     const supabase = await createClient();
@@ -106,23 +106,7 @@ export default async function DashboardPage() {
 
             {/* Mobile Layout (Tabs, Hidden on Desktop) */}
             <div className="lg:hidden">
-                <Tabs defaultValue="edit" className="w-full">
-                    <div className="mb-6 sticky top-16 z-40 bg-slate-950 py-2">
-                        <TabsList className="grid w-full grid-cols-2 bg-slate-900 border border-slate-800">
-                            <TabsTrigger value="edit" className="data-[state=active]:bg-slate-800 data-[state=active]:text-slate-50 text-slate-400">Edit Profile</TabsTrigger>
-                            <TabsTrigger value="preview" className="data-[state=active]:bg-slate-800 data-[state=active]:text-slate-50 text-slate-400">Live Preview</TabsTrigger>
-                        </TabsList>
-                    </div>
-                    <TabsContent value="edit" className="mt-0 outline-none">
-                        {editorContent}
-                    </TabsContent>
-                    <TabsContent value="preview" className="mt-0 outline-none">
-                        <div className="mb-4">
-                            {profile.is_published && <CopyLinkButton slug={profile.slug} />}
-                        </div>
-                        {previewContent}
-                    </TabsContent>
-                </Tabs>
+                <DashboardMobileTabs profile={profile} blocks={blocks} editorContent={editorContent} />
             </div>
         </div>
     );

@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { addBlock } from "@/lib/actions/blocks";
 import { BlockType } from "@/lib/types/database";
+import { motion } from "framer-motion";
+import { scaleOnHover } from "@/lib/motion-variants";
 
 export function AddBlockMenu() {
     const [isAdding, setIsAdding] = useState(false);
@@ -46,22 +48,24 @@ export function AddBlockMenu() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button
-                    variant="outline"
-                    className="w-full h-auto py-6 border-2 border-dashed border-slate-700 hover:border-accent-brand hover:text-white bg-slate-900/50 hover:bg-slate-900/80 rounded-2xl flex flex-col gap-2 transition-all duration-300 group"
-                    disabled={isAdding}
-                >
-                    {isAdding ? (
-                        <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
-                    ) : (
-                        <>
-                            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-accent-brand/20 transition-colors">
-                                <Plus className="h-5 w-5 group-hover:text-accent-brand" />
-                            </div>
-                            <span className="font-medium text-slate-300 group-hover:text-white">Add New Block</span>
-                        </>
-                    )}
-                </Button>
+                <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" whileTap="tap">
+                    <Button
+                        variant="outline"
+                        className="w-full h-auto py-6 border-2 border-dashed border-slate-700 hover:border-accent-brand hover:text-white bg-slate-900/50 hover:bg-slate-900/80 rounded-2xl flex flex-col gap-2 transition-all duration-300 group"
+                        disabled={isAdding}
+                    >
+                        {isAdding ? (
+                            <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+                        ) : (
+                            <>
+                                <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-accent-brand/20 transition-colors">
+                                    <Plus className="h-5 w-5 group-hover:text-accent-brand" />
+                                </div>
+                                <span className="font-medium text-slate-300 group-hover:text-white">Add New Block</span>
+                            </>
+                        )}
+                    </Button>
+                </motion.div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="w-[300px] bg-slate-900 border-slate-800 text-slate-50">
                 <DropdownMenuLabel className="text-slate-400 font-normal text-xs uppercase tracking-wider">Choose Block Type</DropdownMenuLabel>

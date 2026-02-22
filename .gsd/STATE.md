@@ -1,21 +1,29 @@
 # STATE.md
 
 > **Current Position**: `PHASE 5 — Verified`
-> **Last Update**: 2026-02-22 14:40 (completed gaps)
+> **Last Update**: 2026-02-22 14:50 (active)
 > **Status**: Active
 
 ## Current Position
-- **Phase**: 5 — Gap Closure & Documentation (verified)
-- **Task**: Gap closure complete and verified
-- **Status**: ✅ Completed and verified
+- **Phase**: 4 (Completed)
+- **Task**: Execution of Polish & Performance
+- **Status**: Verified 5 verified complete
+- **Status**: Paused
+
+## Last Session Summary
+Phase 4 executed successfully. All `<img>` tags replaced with `next/image`, Framer Motion integrated, and loading skeleton added.
+Codebase mapping (/map) complete.
+- 15+ components identified
+- 12 production dependencies analyzed
+- 4 technical debt items documented in ARCHITECTURE.md
 
 ## Gap Closure Progress
 - [x] **Consolidation**: Verification logs moved to `.gsd/phases/`.
-- [x] **UX Fix**: Drag-and-Drop reordering implemented with `@dnd-kit`.
+- [x] **UX Fix**: Drag-and-Drop reordering implemented.
 - [x] **Technical Fix**: Accent color hydration refinement complete.
 
 ## In-Progress Work
-- None. Ready for Phase 4 (Polish & Performance).
+- None. All Phase 5 goals met.
 
 ## Blockers
 - None.
@@ -23,25 +31,17 @@
 ## Context Dump
 
 ### Decisions Made
-- **Supabase Over Clerk**: User preferred a unified auth/database layer.
-- **Root Routing**: `/[username]` chosen for premium "Identity" branding.
-- **Reserved Slugs**: Static routes protected via constant-based validation.
-- **Dark Mode Default**: `bg-slate-950` base, "Linear-style" aesthetic.
-- **Build Resilience**: Placeholder logic for Supabase clients.
-- **vCard 3.0**: Max cross-device compatibility.
-- **react-markdown**: GFM support via remark-gfm.
-- **Side-by-Side Editor**: Form left, preview right (desktop). Tabs on mobile.
-- **react-hook-form + zod**: Standard shadcn validation pattern.
-- **Up/Down Reordering**: Simple arrows for MVP, dnd-kit deferred.
-- **Supabase Storage**: Avatar uploads (not URL-only).
-- **Publish Toggle**: Draft → Live workflow with visible control.
-- **Slug Editing**: Allowed with link-breakage warning.
+- **@dnd-kit**: Chosen for modularity and performance in Next.js/React 19 environment.
+- **Bulk Reordering**: Implemented a dedicated Server Action `reorderBlocks` for efficiency.
+- **Color Fallback Parity**: Standardized `hsl(250, 100%, 65%)` as the root/preview fallback.
 
 ### Files of Interest
-- `src/app/dashboard/page.tsx`: Main editor shell and live preview integration.
-- `src/lib/actions/profile.ts` / `blocks.ts`: Crucial server actions.
+- `src/components/dashboard/block-list.tsx`: Central hub for dnd logic.
+- `src/components/dashboard/block-editor-card.tsx`: Drag-handle and sortable hook integration.
+- `.gsd/phases/5/VERIFICATION.md`: Evidence of phase completion.
 
 ## Next Steps
-1. `/verify 3` — Verify Phase 3 execution empirically.
-
-
+1. Proceed with checking for any outstanding Phase 5 refinement tasks (documentation, gap closures) or proceed to final launch checks.
+2. Consider running a Lighthouse audit for performance profiling.
+3. Implement Framer Motion transitions for dashboard tabs.
+4. Optimize background images and avatar uploads.

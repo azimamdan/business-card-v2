@@ -52,3 +52,24 @@
 ### Constraints
 - Must be mobile-first; editor must work beautifully on phones.
 - Supabase Storage bucket required for avatar uploads.
+
+## Phase 4 Decisions
+
+**Date:** 2026-02-22
+
+### Scope
+- Full Premium + Performance (Option A + C from discussion).
+- Public profile and landing page are the highest priority polish targets.
+- Dashboard should feel snappy and professional but is secondary to public-facing pages.
+
+### Approach
+- **Framer Motion**: Staggered viewport-triggered reveals on public profile blocks. Hero animations on landing page. Spring micro-interactions on buttons/toggles.
+- **next/image**: Replace all raw `<img>` tags with `next/image`. Configure `remotePatterns` for Supabase.
+- **Loading Skeletons**: Use Next.js `loading.tsx` convention for the public profile route.
+- **Mobile Tab Transitions**: Use `AnimatePresence` for crossfade between Edit/Preview tabs.
+- **Thin Client Wrappers**: Keep public profile as a Server Component; wrap animated sections in a small `"use client"` `AnimatedSection` component.
+
+### Constraints
+- Server Component architecture preserved for SEO on public profile.
+- Framer Motion bundle size (~30KB gzipped) accepted for premium feel.
+- Blob URLs from avatar upload use `unoptimized` prop with `next/image`.

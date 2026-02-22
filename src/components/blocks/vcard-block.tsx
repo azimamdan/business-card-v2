@@ -2,6 +2,8 @@
 
 import { VCardData } from "@/lib/types/database";
 import { Mail, Phone, Building2, Briefcase, Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { scaleOnHover } from "@/lib/motion-variants";
 
 interface VCardBlockProps {
     data: VCardData;
@@ -14,7 +16,7 @@ export function VCardBlock({ data, blockId }: VCardBlockProps) {
     };
 
     return (
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="space-y-2">
                     <h2 className="text-2xl font-bold text-slate-50 tracking-tight">
@@ -38,13 +40,17 @@ export function VCardBlock({ data, blockId }: VCardBlockProps) {
                     </div>
                 </div>
 
-                <button
+                <motion.button
                     onClick={handleDownload}
+                    variants={scaleOnHover}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
                     className="flex items-center justify-center space-x-2 bg-[var(--accent-brand)] hover:opacity-90 text-white px-6 py-3 rounded-xl font-medium transition-opacity w-full md:w-auto shrink-0 shadow-lg shadow-[var(--accent-brand)]/20"
                 >
                     <Download className="w-4 h-4" />
                     <span>Add to Contacts</span>
-                </button>
+                </motion.button>
             </div>
 
             {(data.email || data.phone) && (

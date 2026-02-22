@@ -11,6 +11,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
 import { RESERVED_SLUGS } from "@/lib/constants";
+import { motion } from "framer-motion";
+import { fadeInUp } from "@/lib/motion-variants";
 
 export default function SignupPage() {
     const [email, setEmail] = useState("");
@@ -87,99 +89,101 @@ export default function SignupPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-slate-950 p-4">
-            <Card className="w-full max-w-md border-slate-800 bg-slate-900 text-slate-50 shadow-2xl shadow-purple-500/10">
-                <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold tracking-tight">Create an account</CardTitle>
-                    <CardDescription className="text-slate-400">
-                        Start building your digital identity canvas today
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={handleSignup} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="displayName">Display Name</Label>
-                            <Input
-                                id="displayName"
-                                placeholder="John Doe"
-                                required
-                                value={displayName}
-                                onChange={(e) => setDisplayName(e.target.value)}
-                                className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="slug">Username / Slug</Label>
-                            <div className="relative">
-                                <span className="absolute left-3 top-2.5 text-slate-500 text-sm">canvas.to/</span>
-                                <Input
-                                    id="slug"
-                                    placeholder="username"
-                                    required
-                                    value={slug}
-                                    onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
-                                    className="pl-[74px] border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
-                                />
-                            </div>
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="name@example.com"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
-                            />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
+            <motion.div variants={fadeInUp} initial="initial" animate="animate" className="w-full max-w-md">
+                <Card className="w-full border-slate-800 bg-slate-900 text-slate-50 shadow-2xl shadow-purple-500/10">
+                    <CardHeader className="space-y-1">
+                        <CardTitle className="text-2xl font-bold tracking-tight">Create an account</CardTitle>
+                        <CardDescription className="text-slate-400">
+                            Start building your digital identity canvas today
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleSignup} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="displayName">Display Name</Label>
                                 <Input
-                                    id="password"
-                                    type="password"
+                                    id="displayName"
+                                    placeholder="John Doe"
                                     required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={displayName}
+                                    onChange={(e) => setDisplayName(e.target.value)}
                                     className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="confirmPassword">Confirm</Label>
+                                <Label htmlFor="slug">Username / Slug</Label>
+                                <div className="relative">
+                                    <span className="absolute left-3 top-2.5 text-slate-500 text-sm">canvas.to/</span>
+                                    <Input
+                                        id="slug"
+                                        placeholder="username"
+                                        required
+                                        value={slug}
+                                        onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
+                                        className="pl-[74px] border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">Email</Label>
                                 <Input
-                                    id="confirmPassword"
-                                    type="password"
+                                    id="email"
+                                    type="email"
+                                    placeholder="name@example.com"
                                     required
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
                                 />
                             </div>
-                        </div>
-                        {error && (
-                            <Alert variant="destructive" className="border-red-900/50 bg-red-900/20 text-red-200">
-                                <AlertDescription>{error}</AlertDescription>
-                            </Alert>
-                        )}
-                        <Button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full bg-accent-brand hover:bg-accent-brand/90 text-white transition-all duration-200"
-                        >
-                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Create Account"}
-                        </Button>
-                    </form>
-                </CardContent>
-                <CardFooter>
-                    <p className="text-center text-sm text-slate-400 w-full">
-                        Already have an account?{" "}
-                        <Link href="/login" className="text-accent-brand hover:underline font-medium">
-                            Log in
-                        </Link>
-                    </p>
-                </CardFooter>
-            </Card>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="confirmPassword">Confirm</Label>
+                                    <Input
+                                        id="confirmPassword"
+                                        type="password"
+                                        required
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    />
+                                </div>
+                            </div>
+                            {error && (
+                                <Alert variant="destructive" className="border-red-900/50 bg-red-900/20 text-red-200">
+                                    <AlertDescription>{error}</AlertDescription>
+                                </Alert>
+                            )}
+                            <Button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-accent-brand hover:bg-accent-brand/90 text-white transition-all duration-200"
+                            >
+                                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Create Account"}
+                            </Button>
+                        </form>
+                    </CardContent>
+                    <CardFooter>
+                        <p className="text-center text-sm text-slate-400 w-full">
+                            Already have an account?{" "}
+                            <Link href="/login" className="text-accent-brand hover:underline font-medium">
+                                Log in
+                            </Link>
+                        </p>
+                    </CardFooter>
+                </Card>
+            </motion.div>
         </div>
     );
 }

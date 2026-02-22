@@ -1,6 +1,9 @@
 "use client";
 
 import { HeroData } from "@/lib/types/database";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { scaleOnHover } from "@/lib/motion-variants";
 
 interface HeroBlockProps {
   data: HeroData;
@@ -9,13 +12,20 @@ interface HeroBlockProps {
 
 export function HeroBlock({ data, blockId }: HeroBlockProps) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8 flex flex-col items-center text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <motion.div
+      variants={scaleOnHover}
+      initial="rest"
+      whileHover="hover"
+      className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8 flex flex-col items-center text-center space-y-6"
+    >
       {data.avatarUrl && (
         <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-[var(--accent-brand)] shadow-lg shadow-[var(--accent-brand)]/20">
-          <img
+          <Image
             src={data.avatarUrl}
             alt={data.headline}
-            className="object-cover h-full w-full"
+            fill
+            sizes="128px"
+            className="object-cover"
           />
         </div>
       )}
@@ -29,6 +39,6 @@ export function HeroBlock({ data, blockId }: HeroBlockProps) {
           </p>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

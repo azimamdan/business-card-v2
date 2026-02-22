@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { BlockRenderer } from "@/components/canvas";
 import { Block } from "@/lib/types/database";
+import { AnimatedSection } from "@/components/ui/animated-section";
+import Image from "next/image";
 
 interface ProfilePageProps {
     params: Promise<{
@@ -62,12 +64,19 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         >
             <div className="max-w-2xl mx-auto px-4 py-12 md:py-20 space-y-12">
                 {/* Profile Header */}
-                <header className="text-center space-y-4">
-                    <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto flex items-center justify-center border-2 border-accent-brand overflow-hidden shadow-glow transition-all duration-500">
+                <AnimatedSection delay={0.1} className="text-center space-y-4">
+                    <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto flex items-center justify-center border-2 border-[var(--accent-brand)] overflow-hidden shadow-glow transition-all duration-500 relative">
                         {profile.avatar_url ? (
-                            <img src={profile.avatar_url} alt={profile.display_name} className="w-full h-full object-cover" />
+                            <Image
+                                src={profile.avatar_url}
+                                alt={profile.display_name}
+                                fill
+                                sizes="96px"
+                                className="object-cover"
+                                priority
+                            />
                         ) : (
-                            <span className="text-3xl font-bold text-slate-400">
+                            <span className="text-3xl font-bold text-[var(--accent-brand)]">
                                 {profile.display_name.charAt(0)}
                             </span>
                         )}
@@ -76,13 +85,15 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                         <h1 className="text-3xl font-bold tracking-tight">{profile.display_name}</h1>
                         <p className="text-slate-400 max-w-sm mx-auto">{profile.bio}</p>
                     </div>
-                </header>
+                </AnimatedSection>
 
                 {/* Blocks Area */}
                 <section className="space-y-6">
                     {blocks && blocks.length > 0 ? (
-                        (blocks as Block[]).map((block) => (
-                            <BlockRenderer key={block.id} block={block} />
+                        (blocks as Block[]).map((block, index) => (
+                            <AnimatedSection key={block.id} delay={0.2 + (index * 0.1)}>
+                                <BlockRenderer block={block} />
+                            </AnimatedSection>
                         ))
                     ) : (
                         <div className="text-center py-12 border-2 border-dashed border-slate-800 rounded-3xl text-slate-500">

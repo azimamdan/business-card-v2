@@ -2,6 +2,9 @@
 
 import { ProjectData } from "@/lib/types/database";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { scaleOnHover } from "@/lib/motion-variants";
 
 interface ProjectBlockProps {
     data: ProjectData;
@@ -12,11 +15,13 @@ export function ProjectBlock({ data, blockId }: ProjectBlockProps) {
     const content = (
         <>
             {data.imageUrl && (
-                <div className="w-full h-48 md:h-64 overflow-hidden rounded-t-2xl">
-                    <img
+                <div className="w-full h-48 md:h-64 overflow-hidden rounded-t-2xl relative">
+                    <Image
                         src={data.imageUrl}
                         alt={data.title}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 42rem"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
                     />
                 </div>
             )}
@@ -53,20 +58,33 @@ export function ProjectBlock({ data, blockId }: ProjectBlockProps) {
         </>
     );
 
-    const containerClasses = "block rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-all duration-300 animate-in fade-in slide-in-from-bottom-4";
+    const containerClasses = "block rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-colors duration-300";
 
     if (data.url) {
         return (
-            <a
+            <motion.a
                 href={data.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                variants={scaleOnHover}
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
                 className={`${containerClasses} hover:bg-slate-800/50 hover:border-slate-700`}
             >
                 {content}
-            </a>
+            </motion.a>
         );
     }
 
-    return <div className={containerClasses}>{content}</div>;
+    return (
+        <motion.div
+            variants={scaleOnHover}
+            initial="rest"
+            whileHover="hover"
+            className={containerClasses}
+        >
+            {content}
+        </motion.div>
+    );
 }

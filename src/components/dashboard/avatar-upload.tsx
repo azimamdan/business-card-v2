@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { Loader2, Camera } from "lucide-react";
 import { updateAvatar } from "@/lib/actions/profile";
 import { Profile } from "@/lib/types/database";
+import Image from "next/image";
 
 export function AvatarUpload({ profile }: { profile: Profile }) {
     const [isUploading, setIsUploading] = useState(false);
@@ -52,7 +53,14 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
                     style={{ borderColor: profile.accent_color || 'var(--accent-color)' }}
                 >
                     {previewUrl ? (
-                        <img src={previewUrl} alt="Avatar" className="w-full h-full object-cover" />
+                        <Image
+                            src={previewUrl}
+                            alt="Avatar"
+                            fill
+                            sizes="80px"
+                            className="object-cover"
+                            unoptimized={previewUrl.startsWith('blob:')}
+                        />
                     ) : (
                         <span className="text-2xl font-bold text-slate-400">
                             {profile.display_name.charAt(0)}

@@ -11,7 +11,7 @@ interface MarkdownBlockProps {
 
 export function MarkdownBlock({ data, blockId }: MarkdownBlockProps) {
     return (
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8">
             <div className="prose-canvas">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
