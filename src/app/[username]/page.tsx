@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { BlockRenderer } from "@/components/canvas";
+import { Block } from "@/lib/types/database";
 
 interface ProfilePageProps {
     params: Promise<{
@@ -74,15 +76,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                 {/* Blocks Area */}
                 <section className="space-y-6">
                     {blocks && blocks.length > 0 ? (
-                        blocks.map((block) => (
-                            <div key={block.id} className="p-6 rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-all hover:border-slate-700">
-                                <pre className="text-xs text-slate-500 overflow-auto whitespace-pre-wrap">
-                                    {JSON.stringify(block.data, null, 2)}
-                                </pre>
-                                <div className="mt-2 text-[10px] uppercase tracking-widest text-slate-600 font-bold">
-                                    {block.type} BLOCK
-                                </div>
-                            </div>
+                        (blocks as Block[]).map((block) => (
+                            <BlockRenderer key={block.id} block={block} />
                         ))
                     ) : (
                         <div className="text-center py-12 border-2 border-dashed border-slate-800 rounded-3xl text-slate-500">

@@ -25,7 +25,7 @@
 - Seed demo profile with sample blocks for visual testing.
 
 ### Phase 2: The Canvas Ecosystem (Blocks)
-**Status**: ⬜ Not Started
+**Status**: ✅ Completed (2026-02-22)
 **Objective**: Build the core rendering engine and the first set of functional blocks.
 - **Hero/Bio Block**: Visual identity and introduction.
 - **V-Card Block**: Backend logic for .vcf generation and download.
