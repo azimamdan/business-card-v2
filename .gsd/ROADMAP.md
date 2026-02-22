@@ -1,6 +1,6 @@
 # ROADMAP.md
 
-> **Current Phase**: Not started
+> **Current Phase**: Phase 2 — The Canvas Ecosystem
 > **Milestone**: v1.0 (MVP)
 
 ## Must-Haves (from SPEC)
