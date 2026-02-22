@@ -1,6 +1,6 @@
 # ROADMAP.md
 
-> **Current Phase**: Phase 2 — The Canvas Ecosystem
+> **Current Phase**: Phase 4 — Polish & Performance
 > **Milestone**: v1.0 (MVP)
 
 ## Must-Haves (from SPEC)
@@ -33,10 +33,15 @@
 - **Markdown Block**: Flexible text area for storytelling/resume.
 
 ### Phase 3: The Profile Editor
-**Status**: ⬜ Not Started
+**Status**: ✅ Completed (2026-02-22)
 **Objective**: Create the authenticated dashboard where users manage their identity.
-- Live-preview editor (add, remove, reorder blocks).
-- Appearance settings (Accent Color, slug management).
+- Dashboard shell with auth guard and onboarding flow.
+- Side-by-side editor (form left, live preview right; tabs on mobile).
+- Profile settings: display name, bio, accent color, slug editing, avatar upload (Supabase Storage).
+- Block management: add, edit data, delete, reorder (up/down), show/hide toggle.
+- Publish/Unpublish toggle (Draft → Live workflow).
+- "View Public Profile" + "Copy Link" shortcuts.
+- Server Actions for all CRUD. react-hook-form + zod for validation.
 
 ### Phase 4: Polish & Performance
 **Status**: ⬜ Not Started

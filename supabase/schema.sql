@@ -62,11 +62,49 @@ EXCEPTION
   WHEN duplicate_object THEN null;
 END $$;
 
--- Users can manage own blocks
+-- USERS can manage own blocks
 DO $$ BEGIN
   CREATE POLICY "Users can manage own blocks" ON blocks
     FOR ALL USING (
       auth.uid() = profile_id
+    );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- STORAGE SETUP
+
+-- Create the avatars bucket
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('avatars', 'avatars', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Policy for Public Access (Avatar viewing)
+DO $$ BEGIN
+  CREATE POLICY "Public Access" ON storage.objects
+    FOR SELECT USING (bucket_id = 'avatars');
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- Policy for Authenticated Uploads
+DO $$ BEGIN
+  CREATE POLICY "Authenticated users can upload avatars" ON storage.objects
+    FOR INSERT WITH CHECK (
+      bucket_id = 'avatars' AND
+      auth.role() = 'authenticated' AND
+      (storage.foldername(name))[1] = auth.uid()::text
+    );
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+-- Policy for Own Avatar Deletion/Update
+DO $$ BEGIN
+  CREATE POLICY "Users can update/delete own avatar" ON storage.objects
+    FOR ALL USING (
+      bucket_id = 'avatars' AND
+      (storage.foldername(name))[1] = auth.uid()::text
     );
 EXCEPTION
   WHEN duplicate_object THEN null;

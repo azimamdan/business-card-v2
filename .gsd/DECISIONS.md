@@ -27,3 +27,28 @@
 
 ### Constraints
 - User will provide `SUPABASE_URL` and `SUPABASE_ANON_KEY`.
+
+## Phase 3 Decisions
+
+**Date:** 2026-02-22
+
+### Scope
+- Visible **Publish/Unpublish toggle** (Draft → Live workflow).
+- **Slug editing** allowed with a warning about breaking existing links.
+- **Avatar upload** via Supabase Storage (not URL-only).
+- **Show/hide toggle** per block (`is_visible`) exposed in the editor.
+
+### Approach
+- **Side-by-side editor** (Option A): Form left, live preview right on desktop. Tabs (Edit/Preview) on mobile.
+- Dark Mode / shadcn-ui aesthetic throughout the dashboard shell.
+- **Up/Down arrow buttons** for block reordering (drag-and-drop deferred to Phase 4).
+- **react-hook-form + zod** for form state and validation.
+- **Next.js Server Actions** for all CRUD (profiles + blocks).
+
+### Dashboard Essentials
+- "View Public Profile" button + "Copy Link" shortcut (when published).
+- Onboarding guard: redirect to "Claim your username" if profile doesn't exist.
+
+### Constraints
+- Must be mobile-first; editor must work beautifully on phones.
+- Supabase Storage bucket required for avatar uploads.
