@@ -60,3 +60,14 @@
 - Consolidate Phase 1 & 3 verification reports into `.gsd/phases/`.
 - Implement drag-and-drop reordering for blocks (UX refinement).
 - Verify hydration consistency for dynamic accent colors.
+
+### Phase 6: Project Update
+**Status**: ⬜ Not Started
+**Objective**: The New Identity ([ IDCV ] Identity Canvas), Visual & Copy Refinement (Triple-Theme, Fonts), Global Updates, Feature Adjustments & SEO, Implementation Task.
+**Depends on**: Phase 5
+
+**Tasks**:
+- [ ] TBD (run /plan 6 to create)
+
+**Verification**:
+- TBD
