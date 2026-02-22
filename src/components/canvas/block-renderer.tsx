@@ -1,6 +1,6 @@
 "use client";
 
-import { Block } from "@/lib/types/database";
+import { Block, HeroData, VCardData, ProjectData, MarkdownData } from "@/lib/types/database";
 import {
     HeroBlock,
     VCardBlock,
@@ -15,13 +15,13 @@ interface BlockRendererProps {
 export function BlockRenderer({ block }: BlockRendererProps) {
     switch (block.type) {
         case "hero":
-            return <HeroBlock data={block.data as any} blockId={block.id} />;
+            return <HeroBlock data={block.data as HeroData} />;
         case "vcard":
-            return <VCardBlock data={block.data as any} blockId={block.id} />;
+            return <VCardBlock data={block.data as VCardData} blockId={block.id} />;
         case "project":
-            return <ProjectBlock data={block.data as any} blockId={block.id} />;
+            return <ProjectBlock data={block.data as ProjectData} />;
         case "markdown":
-            return <MarkdownBlock data={block.data as any} blockId={block.id} />;
+            return <MarkdownBlock data={block.data as MarkdownData} />;
         default:
             return (
                 <div className="p-4 rounded-xl border border-dashed border-red-500/50 bg-red-500/10 text-red-400 text-sm text-center">

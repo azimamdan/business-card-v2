@@ -40,8 +40,9 @@ export function SlugEditor({ profile }: { profile: Profile }) {
             } else {
                 setMessage({ text: result.error || "Failed to update username", type: "error" });
             }
-        } catch (error: any) {
-            setMessage({ text: error.message || "An unexpected error occurred", type: "error" });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "An unexpected error occurred";
+            setMessage({ text: message, type: "error" });
         } finally {
             setIsSaving(false);
         }

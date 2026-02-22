@@ -7,10 +7,9 @@ import { scaleOnHover } from "@/lib/motion-variants";
 
 interface HeroBlockProps {
   data: HeroData;
-  blockId: string;
 }
 
-export function HeroBlock({ data, blockId }: HeroBlockProps) {
+export function HeroBlock({ data }: HeroBlockProps) {
   return (
     <motion.div
       variants={scaleOnHover}

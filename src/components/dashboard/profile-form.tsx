@@ -33,8 +33,9 @@ export function ProfileForm({ profile }: { profile: Profile }) {
             await updateProfile(data);
             setMessage({ text: "Profile updated successfully.", type: "success" });
             setTimeout(() => setMessage(null), 3000);
-        } catch (error: any) {
-            setMessage({ text: error.message || "Failed to update profile", type: "error" });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Failed to update profile";
+            setMessage({ text: message, type: "error" });
         } finally {
             setIsSaving(false);
         }

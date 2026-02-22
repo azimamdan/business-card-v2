@@ -8,10 +8,9 @@ import { scaleOnHover } from "@/lib/motion-variants";
 
 interface ProjectBlockProps {
     data: ProjectData;
-    blockId: string;
 }
 
-export function ProjectBlock({ data, blockId }: ProjectBlockProps) {
+export function ProjectBlock({ data }: ProjectBlockProps) {
     const content = (
         <>
             {data.imageUrl && (

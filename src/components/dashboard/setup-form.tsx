@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Sparkles } from "lucide-react";
-import { slugSchema, ProfileFormData, profileSchema } from "@/lib/schemas/profile";
 import { createProfile } from "@/lib/actions/profile";
 import { z } from "zod";
 
@@ -43,8 +42,9 @@ export function SetupForm() {
             if (!result.success) {
                 setError(result.error || "Failed to create profile");
             }
-        } catch (err: any) {
-            setError(err.message || "An unexpected error occurred");
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "An unexpected error occurred";
+            setError(message);
         } finally {
             setIsSaving(false);
         }

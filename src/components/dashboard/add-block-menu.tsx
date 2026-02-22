@@ -12,7 +12,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { addBlock } from "@/lib/actions/blocks";
-import { BlockType } from "@/lib/types/database";
+import { BlockType, BlockData } from "@/lib/types/database";
 import { motion } from "framer-motion";
 import { scaleOnHover } from "@/lib/motion-variants";
 
@@ -37,7 +37,7 @@ export function AddBlockMenu() {
                     defaultData = { content: "# Hello\nStart writing..." };
                     break;
             }
-            await addBlock(type, defaultData as any);
+            await addBlock(type, defaultData as BlockData);
         } catch (error) {
             console.error("Failed to add block", error);
         } finally {

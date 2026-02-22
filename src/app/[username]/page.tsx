@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { Metadata } from "next";
 import { BlockRenderer } from "@/components/canvas";
 import { Block } from "@/lib/types/database";
@@ -48,7 +49,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     }
 
     // 2. Fetch Blocks
-    const { data: blocks, error: blocksError } = await supabase
+    const { data: blocks } = await supabase
         .from("blocks")
         .select("*")
         .eq("profile_id", profile.id)
@@ -104,10 +105,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
                 {/* Footer */}
                 <footer className="pt-12 text-center">
-                    <a href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
+                    <Link href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
                         <div className="w-2 h-2 rounded-full bg-slate-800" />
                         Created with Canvas
-                    </a>
+                    </Link>
                 </footer>
             </div>
         </main>

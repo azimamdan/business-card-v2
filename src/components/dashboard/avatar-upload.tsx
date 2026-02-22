@@ -35,8 +35,9 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
 
         try {
             await updateAvatar(formData);
-        } catch (err: any) {
-            setError(err.message || "Failed to upload avatar");
+        } catch (err) {
+            const message = err instanceof Error ? err.message : "Failed to upload avatar";
+            setError(message);
             setPreviewUrl(profile.avatar_url); // Revert
         } finally {
             setIsUploading(false);

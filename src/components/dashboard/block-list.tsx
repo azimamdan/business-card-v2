@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import {
     DndContext,
     closestCenter,
@@ -27,6 +27,11 @@ interface BlockListProps {
 export function BlockList({ blocks: initialBlocks }: BlockListProps) {
     const [blocks, setBlocks] = useState(initialBlocks);
     const [, startTransition] = useTransition();
+
+    // Sync state when props change (e.g., after server actions like visibility toggle)
+    useEffect(() => {
+        setBlocks(initialBlocks);
+    }, [initialBlocks]);
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -63,6 +68,7 @@ export function BlockList({ blocks: initialBlocks }: BlockListProps) {
 
     return (
         <DndContext
+            id="block-list-dnd"
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
