@@ -13,7 +13,7 @@ import { AvatarUpload } from "@/components/dashboard/avatar-upload";
 import { SlugEditor } from "@/components/dashboard/slug-editor";
 import { PublishToggle } from "@/components/dashboard/publish-toggle";
 import { AddBlockMenu } from "@/components/dashboard/add-block-menu";
-import { BlockEditorCard } from "@/components/dashboard/block-editor-card";
+import { BlockList } from "@/components/dashboard/block-list";
 import { LivePreview } from "@/components/dashboard/live-preview";
 import { CopyLinkButton } from "@/components/dashboard/copy-link-button";
 import { SetupForm } from "@/components/dashboard/setup-form";
@@ -64,14 +64,7 @@ export default async function DashboardPage() {
                 </div>
 
                 <div className="space-y-4">
-                    {blocks.map((block, index) => (
-                        <BlockEditorCard
-                            key={block.id}
-                            block={block}
-                            isFirst={index === 0}
-                            isLast={index === blocks.length - 1}
-                        />
-                    ))}
+                    <BlockList blocks={blocks} />
 
                     <div className="pt-4">
                         <AddBlockMenu />

@@ -151,3 +151,22 @@ export async function toggleBlockVisibility(blockId: string, isVisible: boolean)
     revalidatePath('/dashboard');
     return { success: true };
 }
+export async function reorderBlocks(orderedIds: string[]) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
+    // Perform bulk update of sort_order
+    const updates = orderedIds.map((id, index) =>
+        supabase
+            .from('blocks')
+            .update({ sort_order: index })
+            .eq('id', id)
+            .eq('profile_id', user.id)
+    );
+
+    await Promise.all(updates);
+
+    revalidatePath('/dashboard');
+    return { success: true };
+}

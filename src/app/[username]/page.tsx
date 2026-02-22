@@ -53,8 +53,13 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         .eq("is_visible", true)
         .order("sort_order", { ascending: true });
 
+    const accentColor = profile.accent_color || "hsl(250, 100%, 65%)";
+
     return (
-        <main className="min-h-screen bg-slate-950 text-slate-50" style={{ "--accent-brand": profile.accent_color || "var(--accent-color)" } as React.CSSProperties}>
+        <main
+            className="min-h-screen bg-slate-950 text-slate-50"
+            style={{ "--accent-brand": accentColor } as React.CSSProperties}
+        >
             <div className="max-w-2xl mx-auto px-4 py-12 md:py-20 space-y-12">
                 {/* Profile Header */}
                 <header className="text-center space-y-4">

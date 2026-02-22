@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Block } from "@/lib/types/database";
-import { Target, Contact, FolderOutput, FileText, ChevronDown, ChevronUp, Trash2, GripVertical } from "lucide-react";
+import { Target, Contact, FolderOutput, FileText, ChevronDown, Trash2, GripVertical } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { deleteBlock, reorderBlock, toggleBlockVisibility } from "@/lib/actions/blocks";
+import { deleteBlock, toggleBlockVisibility } from "@/lib/actions/blocks";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import { HeroForm } from "./block-forms/hero-form";
@@ -13,23 +13,38 @@ import { VCardForm } from "./block-forms/vcard-form";
 import { ProjectForm } from "./block-forms/project-form";
 import { MarkdownForm } from "./block-forms/markdown-form";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 interface BlockEditorCardProps {
     block: Block;
     isFirst: boolean;
     isLast: boolean;
 }
 
-export function BlockEditorCard({ block, isFirst, isLast }: BlockEditorCardProps) {
+export function BlockEditorCard({ block }: BlockEditorCardProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const handleToggleVisibility = async (checked: boolean) => {
-        await toggleBlockVisibility(block.id, checked);
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id: block.id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        zIndex: isDragging ? 50 : 0,
+        position: 'relative' as const,
     };
 
-    const handleReorder = async (direction: 'up' | 'down') => {
-        await reorderBlock(block.id, direction);
+    const handleToggleVisibility = async (checked: boolean) => {
+        await toggleBlockVisibility(block.id, checked);
     };
 
     const handleDelete = async () => {
@@ -60,14 +75,26 @@ export function BlockEditorCard({ block, isFirst, isLast }: BlockEditorCardProps
     };
 
     return (
-        <div className={`border border-slate-800 bg-slate-900/70 rounded-xl overflow-hidden transition-all ${!block.is_visible ? 'opacity-60 grayscale-[30%]' : ''}`}>
+        <div
+            ref={setNodeRef}
+            style={style}
+            className={`border border-slate-800 bg-slate-900/70 rounded-xl overflow-hidden transition-all ${!block.is_visible ? 'opacity-60 grayscale-[30%]' : ''} ${isDragging ? 'shadow-2xl scale-[1.02] border-accent-brand/50 ring-2 ring-accent-brand/20' : ''}`}
+        >
             {/* Header / Toolbar */}
             <div className="bg-slate-900 px-4 py-3 flex items-center justify-between">
                 <div
                     className="flex items-center gap-3 cursor-pointer select-none flex-1"
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    <div className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center shrink-0">
+                    <div
+                        {...attributes}
+                        {...listeners}
+                        className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <GripVertical className="h-4 w-4 text-slate-500" />
+                    </div>
+                    <div className="w-8 h-8 rounded bg-slate-900/50 flex items-center justify-center shrink-0">
                         {getIcon()}
                     </div>
                     <div className="flex-1">
@@ -87,27 +114,6 @@ export function BlockEditorCard({ block, isFirst, isLast }: BlockEditorCardProps
                         title="Toggle visibility"
                     />
 
-                    <div className="flex flex-col gap-0.5">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-5 w-6 rounded-sm text-slate-400 hover:text-white"
-                            onClick={() => handleReorder('up')}
-                            disabled={isFirst}
-                        >
-                            <ChevronUp className="h-3 w-3" />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-5 w-6 rounded-sm text-slate-400 hover:text-white"
-                            onClick={() => handleReorder('down')}
-                            disabled={isLast}
-                        >
-                            <ChevronDown className="h-3 w-3" />
-                        </Button>
-                    </div>
-
                     <Button
                         variant="ghost"
                         size="icon"
@@ -122,10 +128,12 @@ export function BlockEditorCard({ block, isFirst, isLast }: BlockEditorCardProps
             {/* Collapsible Body */}
             {isOpen && (
                 <div className="p-4 border-t border-slate-800/50 bg-slate-900/40">
+                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
                     {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
                     {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
                     {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
                     {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
+                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
                 </div>
             )}
 
