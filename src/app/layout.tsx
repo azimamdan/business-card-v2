@@ -16,6 +16,13 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "IDCV — Your Modular Identity Canvas",
   description: "IDCV — Your Modular Identity Canvas. Build your professional identity with modular blocks.",
+  openGraph: {
+    type: "website",
+    url: "https://idcv.me",
+    title: "IDCV",
+    description: "Your Modular Identity Canvas",
+    siteName: "IDCV",
+  },
 };
 
 export default function RootLayout({

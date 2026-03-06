@@ -31,6 +31,9 @@ export async function generateMetadata({
     return {
         title: `${profile.display_name} | IDCV`,
         description: profile.bio,
+        alternates: {
+            canonical: `https://idcv.me/${username}`,
+        },
     };
 }
 

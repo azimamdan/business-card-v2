@@ -1,7 +1,7 @@
 # ROADMAP.md
 
-> **Current Phase**: Phase 4 — Polish & Performance
-> **Milestone**: v1.0 (MVP)
+> **Current Phase**: Phase 6 — Project Update
+> **Milestone**: v1.1
 
 ## Must-Haves (from SPEC)
 - [ ] User authentication (Supabase Auth)
@@ -62,17 +62,17 @@
 - Verify hydration consistency for dynamic accent colors.
 
 ### Phase 6: Project Update
-**Status**: 🔲 Planned
+**Status**: ✅ Completed
 **Objective**: The New Identity ([ IDCV ] Identity Canvas), Visual & Copy Refinement (Triple-Theme, Fonts), Global Updates, Feature Adjustments & SEO, Implementation Task.
 **Depends on**: Phase 5
 
 **Plans** (6 plans, 4 waves):
-- [ ] 6.1: Theme Infrastructure & Provider (wave 1)
-- [ ] 6.2: Theme Switcher Component (wave 1)
-- [ ] 6.3: Hardcoded Color Migration — Pages (wave 2)
-- [ ] 6.4: Hardcoded Color Migration — Components + Branding (wave 2)
-- [ ] 6.5: Logo, Favicon & Skeleton Loaders (wave 3)
-- [ ] 6.6: SEO Metadata & Final Polish (wave 4)
+- [x] 6.1: Theme Infrastructure & Provider (wave 1)
+- [x] 6.2: Theme Switcher Component (wave 1)
+- [x] 6.3: Hardcoded Color Migration — Pages (wave 2)
+- [x] 6.4: Hardcoded Color Migration — Components + Branding (wave 2)
+- [x] 6.5: Logo, Favicon & Skeleton Loaders (wave 3)
+- [x] 6.6: SEO Metadata & Final Polish (wave 4)
 
 **Verification**:
 - `npm run build` passes
