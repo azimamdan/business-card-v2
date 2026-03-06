@@ -41,12 +41,12 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-950 p-4">
+        <div className="flex min-h-screen items-center justify-center bg-background p-4">
             <motion.div variants={fadeInUp} initial="initial" animate="animate" className="w-full max-w-md">
-                <Card className="w-full border-slate-800 bg-slate-900 text-slate-50 shadow-2xl shadow-purple-500/10">
+                <Card className="w-full border-border bg-card text-foreground shadow-2xl shadow-purple-500/10">
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardDescription className="text-muted-foreground">
                             Enter your credentials to access your identity canvas
                         </CardDescription>
                     </CardHeader>
@@ -61,7 +61,7 @@ export default function LoginPage() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -74,7 +74,7 @@ export default function LoginPage() {
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                 />
                             </div>
                             {error && (
@@ -92,7 +92,7 @@ export default function LoginPage() {
                         </form>
                     </CardContent>
                     <CardFooter>
-                        <p className="text-center text-sm text-slate-400 w-full">
+                        <p className="text-center text-sm text-muted-foreground w-full">
                             Don&apos;t have an account?{" "}
                             <Link href="/signup" className="text-accent-brand hover:underline font-medium">
                                 Sign up

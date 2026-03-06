@@ -29,7 +29,7 @@ export async function generateMetadata({
     if (!profile) return { title: "Profile Not Found" };
 
     return {
-        title: `${profile.display_name} | Canvas`,
+        title: `${profile.display_name} | IDCV`,
         description: profile.bio,
     };
 }
@@ -108,7 +108,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                 <footer className="pt-12 pb-6 text-center space-y-6">
                     <Link href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
                         <div className="w-2 h-2 rounded-full bg-slate-800" />
-                        Created with Canvas
+                        Created with IDCV
                     </Link>
                     <div className="flex justify-center">
                         <ThemeSwitcher variant="compact" />

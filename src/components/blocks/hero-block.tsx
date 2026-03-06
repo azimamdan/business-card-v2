@@ -15,7 +15,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
       variants={scaleOnHover}
       initial="rest"
       whileHover="hover"
-      className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-8 flex flex-col items-center text-center space-y-6"
+      className="rounded-2xl border border-border bg-card/50 backdrop-blur-sm p-8 flex flex-col items-center text-center space-y-6"
     >
       {data.avatarUrl && (
         <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-[var(--accent-brand)] shadow-lg shadow-[var(--accent-brand)]/20">
@@ -29,11 +29,11 @@ export function HeroBlock({ data }: HeroBlockProps) {
         </div>
       )}
       <div className="space-y-4">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-50">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
           {data.headline}
         </h1>
         {data.subheadline && (
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {data.subheadline}
           </p>
         )}

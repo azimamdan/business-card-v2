@@ -88,12 +88,12 @@ export default function SignupPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-950 p-4">
+        <div className="flex min-h-screen items-center justify-center bg-background p-4">
             <motion.div variants={fadeInUp} initial="initial" animate="animate" className="w-full max-w-md">
-                <Card className="w-full border-slate-800 bg-slate-900 text-slate-50 shadow-2xl shadow-purple-500/10">
+                <Card className="w-full border-border bg-card text-foreground shadow-2xl shadow-purple-500/10">
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold tracking-tight">Create an account</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardDescription className="text-muted-foreground">
                             Start building your digital identity canvas today
                         </CardDescription>
                     </CardHeader>
@@ -107,20 +107,20 @@ export default function SignupPage() {
                                     required
                                     value={displayName}
                                     onChange={(e) => setDisplayName(e.target.value)}
-                                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="slug">Username / Slug</Label>
                                 <div className="relative">
-                                    <span className="absolute left-3 top-2.5 text-slate-500 text-sm">canvas.to/</span>
+                                    <span className="absolute left-3 top-2.5 text-muted-foreground text-sm">canvas.to/</span>
                                     <Input
                                         id="slug"
                                         placeholder="username"
                                         required
                                         value={slug}
                                         onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
-                                        className="pl-[74px] border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                        className="pl-[74px] border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                     />
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ export default function SignupPage() {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -145,7 +145,7 @@ export default function SignupPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                        className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -156,7 +156,7 @@ export default function SignupPage() {
                                         required
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
-                                        className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                        className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                                     />
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ export default function SignupPage() {
                         </form>
                     </CardContent>
                     <CardFooter>
-                        <p className="text-center text-sm text-slate-400 w-full">
+                        <p className="text-center text-sm text-muted-foreground w-full">
                             Already have an account?{" "}
                             <Link href="/login" className="text-accent-brand hover:underline font-medium">
                                 Log in

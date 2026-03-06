@@ -39,15 +39,15 @@ export default async function DashboardPage() {
             {/* Identity Settings */}
             <section className="space-y-6">
                 <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">Identity</h2>
-                    <p className="text-slate-400">Manage your personal brand and public profile URL.</p>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">Identity</h2>
+                    <p className="text-muted-foreground">Manage your personal brand and public profile URL.</p>
                 </div>
 
-                <div className="grid gap-6 p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl">
+                <div className="grid gap-6 p-6 rounded-2xl bg-card border border-border shadow-xl">
                     <AvatarUpload profile={profile} />
-                    <Separator className="bg-slate-800" />
+                    <Separator className="bg-border" />
                     <SlugEditor profile={profile} />
-                    <Separator className="bg-slate-800" />
+                    <Separator className="bg-border" />
                     <ProfileForm profile={profile} />
                 </div>
             </section>
@@ -56,8 +56,8 @@ export default async function DashboardPage() {
             <section className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-2xl font-bold text-white mb-2">Blocks</h2>
-                        <p className="text-slate-400">Build your canvas by adding and ordering components.</p>
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Blocks</h2>
+                        <p className="text-muted-foreground">Build your canvas by adding and ordering components.</p>
                     </div>
                 </div>
 
@@ -73,8 +73,8 @@ export default async function DashboardPage() {
             {/* Publishing Settings */}
             <section className="space-y-6">
                 <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">Publishing</h2>
-                    <p className="text-slate-400">Control who can see your canvas.</p>
+                    <h2 className="text-2xl font-bold text-foreground mb-2">Publishing</h2>
+                    <p className="text-muted-foreground">Control who can see your canvas.</p>
                 </div>
                 <PublishToggle profile={profile} />
             </section>

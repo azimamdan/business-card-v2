@@ -31,7 +31,7 @@ export function HeroForm({ blockId, initialData }: { blockId: string, initialDat
                 <Input
                     value={data.headline}
                     onChange={e => setData({ ...data, headline: e.target.value })}
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     required
                 />
             </div>
@@ -40,7 +40,7 @@ export function HeroForm({ blockId, initialData }: { blockId: string, initialDat
                 <Input
                     value={data.subheadline || ""}
                     onChange={e => setData({ ...data, subheadline: e.target.value })}
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                 />
             </div>
             <div className="space-y-2">
@@ -49,11 +49,11 @@ export function HeroForm({ blockId, initialData }: { blockId: string, initialDat
                     value={data.avatarUrl || ""}
                     onChange={e => setData({ ...data, avatarUrl: e.target.value })}
                     placeholder="https://example.com/image.jpg"
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                 />
             </div>
             <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={isSaving} size="sm" className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700">
+                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-slate-700 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                     Save Hero
                 </Button>

@@ -78,10 +78,10 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
         <div
             ref={setNodeRef}
             style={style}
-            className={`border border-slate-800 bg-slate-900/70 rounded-xl overflow-hidden transition-all ${!block.is_visible ? 'opacity-60 grayscale-[30%]' : ''} ${isDragging ? 'shadow-2xl scale-[1.02] border-accent-brand/50 ring-2 ring-accent-brand/20' : ''}`}
+            className={`border border-border bg-card/70 rounded-xl overflow-hidden transition-all ${!block.is_visible ? 'opacity-60 grayscale-[30%]' : ''} ${isDragging ? 'shadow-2xl scale-[1.02] border-accent-brand/50 ring-2 ring-accent-brand/20' : ''}`}
         >
             {/* Header / Toolbar */}
-            <div className="bg-slate-900 px-4 py-3 flex items-center justify-between">
+            <div className="bg-card px-4 py-3 flex items-center justify-between">
                 <div
                     className="flex items-center gap-3 cursor-pointer select-none flex-1"
                     onClick={() => setIsOpen(!isOpen)}
@@ -89,24 +89,24 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
                     <div
                         {...attributes}
                         {...listeners}
-                        className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors"
+                        className="w-8 h-8 rounded bg-muted flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <GripVertical className="h-4 w-4 text-slate-500" />
+                        <GripVertical className="h-4 w-4 text-muted-foreground" />
                     </div>
-                    <div className="w-8 h-8 rounded bg-slate-900/50 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded bg-card/50 flex items-center justify-center shrink-0">
                         {getIcon()}
                     </div>
                     <div className="flex-1">
-                        <h4 className="font-medium text-slate-200 text-sm">{getTitle()}</h4>
-                        {!block.is_visible && <span className="text-xs text-slate-500">Hidden from public</span>}
+                        <h4 className="font-medium text-foreground/80 text-sm">{getTitle()}</h4>
+                        {!block.is_visible && <span className="text-xs text-muted-foreground">Hidden from public</span>}
                     </div>
-                    <div className="text-slate-500 mr-2">
+                    <div className="text-muted-foreground mr-2">
                         <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 border-l border-slate-800 pl-4 ml-2">
+                <div className="flex items-center gap-2 border-l border-border pl-4 ml-2">
                     <Switch
                         checked={block.is_visible}
                         onCheckedChange={handleToggleVisibility}
@@ -117,7 +117,7 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
                     <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 ml-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10"
+                        className="h-8 w-8 ml-2 text-muted-foreground hover:text-red-400 hover:bg-red-400/10"
                         onClick={() => setShowDeleteConfirm(true)}
                     >
                         <Trash2 className="h-4 w-4" />
@@ -127,7 +127,7 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
 
             {/* Collapsible Body */}
             {isOpen && (
-                <div className="p-4 border-t border-slate-800/50 bg-slate-900/40">
+                <div className="p-4 border-t border-border/50 bg-card/40">
                     {/* eslint-disable @typescript-eslint/no-explicit-any */}
                     {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
                     {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
@@ -139,16 +139,16 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
 
             {/* Delete Confirmation */}
             <Dialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
-                <DialogContent className="bg-slate-900 border-slate-800 text-slate-50 sm:max-w-md">
+                <DialogContent className="bg-card border-border text-foreground sm:max-w-md">
                     <DialogHeader>
                         <DialogTitle>Delete {getTitle()}?</DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-muted-foreground">
                             Are you sure you want to delete this block? This action cannot be undone.
                             Consider hiding it instead if you want to keep the content.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter className="gap-2 sm:gap-0 mt-4">
-                        <Button variant="ghost" onClick={() => setShowDeleteConfirm(false)} className="text-slate-300">
+                        <Button variant="ghost" onClick={() => setShowDeleteConfirm(false)} className="text-foreground/70">
                             Cancel
                         </Button>
                         <Button

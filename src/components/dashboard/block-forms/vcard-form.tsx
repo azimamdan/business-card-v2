@@ -32,7 +32,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                     <Input
                         value={data.firstName}
                         onChange={e => setData({ ...data, firstName: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                         required
                     />
                 </div>
@@ -41,7 +41,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                     <Input
                         value={data.lastName}
                         onChange={e => setData({ ...data, lastName: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                         required
                     />
                 </div>
@@ -53,7 +53,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                     <Input
                         value={data.title || ""}
                         onChange={e => setData({ ...data, title: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
                 <div className="space-y-2">
@@ -61,7 +61,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                     <Input
                         value={data.company || ""}
                         onChange={e => setData({ ...data, company: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
             </div>
@@ -73,7 +73,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                         type="email"
                         value={data.email || ""}
                         onChange={e => setData({ ...data, email: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
                 <div className="space-y-2">
@@ -82,13 +82,13 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
                         type="tel"
                         value={data.phone || ""}
                         onChange={e => setData({ ...data, phone: e.target.value })}
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
             </div>
 
             <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={isSaving} size="sm" className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700">
+                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-slate-700 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                     Save V-Card
                 </Button>

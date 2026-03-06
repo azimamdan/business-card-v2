@@ -52,9 +52,9 @@ export function SlugEditor({ profile }: { profile: Profile }) {
         return (
             <div className="space-y-2">
                 <Label>Username / URL</Label>
-                <div className="flex items-center justify-between p-3 rounded-md bg-slate-800/50 border border-slate-700">
-                    <span className="text-slate-300 truncate">canvas.to/<span className="text-slate-50 font-medium">{profile.slug}</span></span>
-                    <Button variant="ghost" size="sm" onClick={() => setIsEditing(true)} className="h-8 px-2 text-slate-400 hover:text-white">
+                <div className="flex items-center justify-between p-3 rounded-md bg-muted/50 border border-input">
+                    <span className="text-foreground/70 truncate">idcv.me/<span className="text-foreground font-medium">{profile.slug}</span></span>
+                    <Button variant="ghost" size="sm" onClick={() => setIsEditing(true)} className="h-8 px-2 text-muted-foreground hover:text-white">
                         <Edit2 className="h-4 w-4 mr-2" />
                         Edit
                     </Button>
@@ -67,10 +67,10 @@ export function SlugEditor({ profile }: { profile: Profile }) {
     }
 
     return (
-        <div className="space-y-4 p-4 rounded-md border border-slate-700 bg-slate-800/30">
+        <div className="space-y-4 p-4 rounded-md border border-input bg-muted/30">
             <div className="flex items-center justify-between">
                 <Label>Edit Username</Label>
-                <Button variant="ghost" size="sm" onClick={() => { setIsEditing(false); reset(); }} className="h-6 px-2 text-slate-400">
+                <Button variant="ghost" size="sm" onClick={() => { setIsEditing(false); reset(); }} className="h-6 px-2 text-muted-foreground">
                     <X className="h-4 w-4" />
                 </Button>
             </div>
@@ -83,10 +83,10 @@ export function SlugEditor({ profile }: { profile: Profile }) {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                 <div className="relative">
-                    <span className="absolute left-3 top-2.5 text-slate-500 text-sm">canvas.to/</span>
+                    <span className="absolute left-3 top-2.5 text-muted-foreground text-sm">idcv.me/</span>
                     <Input
                         {...register("slug")}
-                        className="pl-[82px] border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                        className="pl-[82px] border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
                 {errors.slug && <p className="text-sm text-red-500">{errors.slug.message}</p>}

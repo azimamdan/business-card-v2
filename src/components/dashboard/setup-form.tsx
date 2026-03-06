@@ -51,13 +51,13 @@ export function SetupForm() {
     };
 
     return (
-        <Card className="border-slate-800 bg-slate-900 shadow-2xl">
+        <Card className="border-border bg-card shadow-2xl">
             <CardHeader className="text-center">
                 <div className="mx-auto w-12 h-12 rounded-full bg-accent-brand/20 flex items-center justify-center mb-4">
                     <Sparkles className="h-6 w-6 text-accent-brand" />
                 </div>
                 <CardTitle className="text-2xl font-bold text-white">Claim your space</CardTitle>
-                <CardDescription className="text-slate-400">
+                <CardDescription className="text-muted-foreground">
                     Set up your identity canvas in seconds.
                 </CardDescription>
             </CardHeader>
@@ -69,7 +69,7 @@ export function SetupForm() {
                             id="display_name"
                             placeholder="Alex Rivera"
                             {...register("display_name")}
-                            className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                            className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                         />
                         {errors.display_name && (
                             <p className="text-sm text-red-500">{errors.display_name.message}</p>
@@ -79,12 +79,12 @@ export function SetupForm() {
                     <div className="space-y-2">
                         <Label htmlFor="slug">Username / URL</Label>
                         <div className="relative">
-                            <span className="absolute left-3 top-2.5 text-slate-500 text-sm">canvas.to/</span>
+                            <span className="absolute left-3 top-2.5 text-muted-foreground text-sm">idcv.me/</span>
                             <Input
                                 id="slug"
                                 placeholder="alex"
                                 {...register("slug")}
-                                className="pl-[82px] border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                                className="pl-[82px] border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                             />
                         </div>
                         {errors.slug && (

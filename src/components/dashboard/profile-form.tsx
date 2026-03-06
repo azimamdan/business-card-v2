@@ -48,7 +48,7 @@ export function ProfileForm({ profile }: { profile: Profile }) {
                 <Input
                     id="display_name"
                     {...register("display_name")}
-                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand"
+                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand"
                 />
                 {errors.display_name && (
                     <p className="text-sm text-red-500">{errors.display_name.message}</p>
@@ -61,14 +61,14 @@ export function ProfileForm({ profile }: { profile: Profile }) {
                     id="bio"
                     {...register("bio")}
                     rows={4}
-                    className="border-slate-700 bg-slate-800 text-slate-50 focus-visible:ring-accent-brand resize-none"
+                    className="border-input bg-muted text-foreground focus-visible:ring-accent-brand resize-none"
                     placeholder="A short intro about yourself..."
                 />
                 <div className="flex justify-between">
                     {errors.bio ? (
                         <p className="text-sm text-red-500">{errors.bio.message}</p>
                     ) : (
-                        <p className="text-xs text-slate-500">Max 300 characters</p>
+                        <p className="text-xs text-muted-foreground">Max 300 characters</p>
                     )}
                 </div>
             </div>
@@ -80,9 +80,9 @@ export function ProfileForm({ profile }: { profile: Profile }) {
                         id="accent_color"
                         type="color"
                         {...register("accent_color")}
-                        className="w-16 h-12 p-1 border border-slate-700 bg-slate-800 rounded cursor-pointer"
+                        className="w-16 h-12 p-1 border border-input bg-muted rounded cursor-pointer"
                     />
-                    <span className="text-sm text-slate-400">Choose a brand color</span>
+                    <span className="text-sm text-muted-foreground">Choose a brand color</span>
                 </div>
             </div>
 

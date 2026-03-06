@@ -27,16 +27,16 @@ export function ProjectBlock({ data }: ProjectBlockProps) {
 
             <div className="p-8 space-y-4">
                 <div className="flex justify-between items-start gap-4">
-                    <h3 className="text-xl font-bold text-slate-50 tracking-tight">
+                    <h3 className="text-xl font-bold text-foreground tracking-tight">
                         {data.title}
                     </h3>
                     {data.url && (
-                        <ExternalLink className="w-5 h-5 text-slate-400 shrink-0 mt-1" />
+                        <ExternalLink className="w-5 h-5 text-muted-foreground shrink-0 mt-1" />
                     )}
                 </div>
 
                 {data.description && (
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                         {data.description}
                     </p>
                 )}
@@ -46,7 +46,7 @@ export function ProjectBlock({ data }: ProjectBlockProps) {
                         {data.tags.map((tag, idx) => (
                             <span
                                 key={idx}
-                                className="bg-slate-800 text-slate-300 text-xs px-3 py-1 rounded-full border border-slate-700"
+                                className="bg-muted text-foreground/70 text-xs px-3 py-1 rounded-full border border-input"
                             >
                                 {tag}
                             </span>
@@ -57,7 +57,7 @@ export function ProjectBlock({ data }: ProjectBlockProps) {
         </>
     );
 
-    const containerClasses = "block rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-colors duration-300";
+    const containerClasses = "block rounded-2xl border border-border bg-card/50 backdrop-blur-sm transition-colors duration-300";
 
     if (data.url) {
         return (
@@ -69,7 +69,7 @@ export function ProjectBlock({ data }: ProjectBlockProps) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="tap"
-                className={`${containerClasses} hover:bg-slate-800/50 hover:border-slate-700`}
+                className={`${containerClasses} hover:bg-muted/50 hover:border-input`}
             >
                 {content}
             </motion.a>

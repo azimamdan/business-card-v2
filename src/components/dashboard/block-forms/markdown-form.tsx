@@ -29,18 +29,18 @@ export function MarkdownForm({ blockId, initialData }: { blockId: string, initia
             <div className="space-y-2">
                 <div className="flex justify-between items-center">
                     <Label>Content (Markdown)</Label>
-                    <span className="text-xs text-slate-500">Supports GFM</span>
+                    <span className="text-xs text-muted-foreground">Supports GFM</span>
                 </div>
                 <Textarea
                     value={data.content}
                     onChange={e => setData({ ...data, content: e.target.value })}
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand font-mono text-sm leading-relaxed min-h-[250px]"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand font-mono text-sm leading-relaxed min-h-[250px]"
                     required
                 />
             </div>
 
             <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={isSaving} size="sm" className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700">
+                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-slate-700 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                     Save Markdown
                 </Button>

@@ -49,7 +49,7 @@ export function PublishToggle({ profile }: { profile: Profile }) {
 
     return (
         <>
-            <div className="flex items-center justify-between p-4 rounded-xl border border-slate-800 bg-slate-900 shadow-sm">
+            <div className="flex items-center justify-between p-4 rounded-xl border border-border bg-card shadow-sm">
                 <div className="space-y-1">
                     <div className="flex items-center gap-2">
                         <Label htmlFor="publish-mode" className="text-base font-medium">Profile Status</Label>
@@ -61,12 +61,12 @@ export function PublishToggle({ profile }: { profile: Profile }) {
                             ></motion.span>
                         </span>
                     </div>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                         {isPublished ? "Your profile is live and visible to the public." : "Your profile is a draft and only visible to you."}
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
-                    {isUpdating && <Loader2 className="h-4 w-4 animate-spin text-slate-500" />}
+                    {isUpdating && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
                     <Switch
                         id="publish-mode"
                         checked={isPublished}
@@ -78,15 +78,15 @@ export function PublishToggle({ profile }: { profile: Profile }) {
             </div>
 
             <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
-                <DialogContent className="bg-slate-900 border-slate-800 text-slate-50 sm:max-w-md">
+                <DialogContent className="bg-card border-border text-foreground sm:max-w-md">
                     <DialogHeader>
                         <DialogTitle>Unpublish Profile?</DialogTitle>
-                        <DialogDescription className="text-slate-400">
+                        <DialogDescription className="text-muted-foreground">
                             This will hide your profile from the public. Anyone trying to visit your URL will see a 404 page until you publish again.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter className="gap-2 sm:gap-0 mt-4">
-                        <Button variant="ghost" onClick={() => setShowConfirm(false)} className="text-slate-300 hover:text-white">
+                        <Button variant="ghost" onClick={() => setShowConfirm(false)} className="text-foreground/70 hover:text-white">
                             Cancel
                         </Button>
                         <Button

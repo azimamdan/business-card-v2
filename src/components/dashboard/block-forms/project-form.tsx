@@ -35,7 +35,7 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                 <Input
                     value={data.title}
                     onChange={e => setData({ ...data, title: e.target.value })}
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     required
                 />
             </div>
@@ -45,7 +45,7 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                 <Textarea
                     value={data.description}
                     onChange={e => setData({ ...data, description: e.target.value })}
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand resize-none"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand resize-none"
                     rows={3}
                     required
                 />
@@ -58,7 +58,7 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                         value={data.url || ""}
                         onChange={e => setData({ ...data, url: e.target.value })}
                         placeholder="https://..."
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
                 <div className="space-y-2">
@@ -67,7 +67,7 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                         value={data.imageUrl || ""}
                         onChange={e => setData({ ...data, imageUrl: e.target.value })}
                         placeholder="https://example.com/image.jpg"
-                        className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
             </div>
@@ -78,12 +78,12 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                     value={tagsInput}
                     onChange={e => setTagsInput(e.target.value)}
                     placeholder="React, Next.js, Tailwind..."
-                    className="bg-slate-800 border-slate-700 text-slate-50 focus-visible:ring-accent-brand"
+                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                 />
             </div>
 
             <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={isSaving} size="sm" className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700">
+                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-slate-700 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                     Save Project
                 </Button>

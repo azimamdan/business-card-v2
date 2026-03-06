@@ -49,7 +49,7 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
         <div className="flex items-center gap-6">
             <div className="relative group">
                 <div
-                    className="w-20 h-20 rounded-full border-2 border-slate-700 bg-slate-800 flex items-center justify-center overflow-hidden cursor-pointer shadow-glow transition-all"
+                    className="w-20 h-20 rounded-full border-2 border-input bg-muted flex items-center justify-center overflow-hidden cursor-pointer shadow-glow transition-all"
                     onClick={() => fileInputRef.current?.click()}
                     style={{ borderColor: profile.accent_color || 'var(--accent-color)' }}
                 >
@@ -63,7 +63,7 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
                             unoptimized={previewUrl.startsWith('blob:')}
                         />
                     ) : (
-                        <span className="text-2xl font-bold text-slate-400">
+                        <span className="text-2xl font-bold text-muted-foreground">
                             {profile.display_name.charAt(0)}
                         </span>
                     )}
@@ -73,7 +73,7 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
                     </div>
 
                     {isUploading && (
-                        <div className="absolute inset-0 bg-slate-900/80 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-card/80 flex items-center justify-center">
                             <Loader2 className="w-6 h-6 animate-spin text-accent-brand" />
                         </div>
                     )}
@@ -88,8 +88,8 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
             </div>
 
             <div className="space-y-1">
-                <h3 className="font-medium text-slate-200">Profile Picture</h3>
-                <p className="text-xs text-slate-400">JPG, PNG or WEBP. Max 2MB.</p>
+                <h3 className="font-medium text-foreground/80">Profile Picture</h3>
+                <p className="text-xs text-muted-foreground">JPG, PNG or WEBP. Max 2MB.</p>
                 {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
             </div>
         </div>
