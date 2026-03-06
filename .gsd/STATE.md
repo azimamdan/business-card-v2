@@ -5,9 +5,9 @@
 > **Status**: Active
 
 ## Current Position
-- **Phase**: 6 (Not Started)
-- **Task**: Project Update
-- **Status**: Added
+- **Phase**: 6 (Planned)
+- **Task**: Planning complete
+- **Status**: Ready for execution
 
 ## Last Session Summary
 Phase 4 executed successfully. All `<img>` tags replaced with `next/image`, Framer Motion integrated, and loading skeleton added.
@@ -41,7 +41,4 @@ Codebase mapping (/map) complete.
 - `.gsd/phases/5/VERIFICATION.md`: Evidence of phase completion.
 
 ## Next Steps
-1. Proceed with checking for any outstanding Phase 5 refinement tasks (documentation, gap closures) or proceed to final launch checks.
-2. Consider running a Lighthouse audit for performance profiling.
-3. Implement Framer Motion transitions for dashboard tabs.
-4. Optimize background images and avatar uploads.
+1. /execute 6

@@ -73,3 +73,28 @@
 - Server Component architecture preserved for SEO on public profile.
 - Framer Motion bundle size (~30KB gzipped) accepted for premium feel.
 - Blob URLs from avatar upload use `unoptimized` prop with `next/image`.
+
+## Phase 6 Decisions
+
+**Date:** 2026-03-06
+
+### Scope
+- **Rebrand**: All user-facing copy from "Canvas" → "[ IDCV ] Identity Canvas". Internal component names stay unchanged.
+- **Domain**: `canvas.to/` → `idcv.me/` in all user-facing slug prefixes.
+- **Fonts**: Geist (primary) + JetBrains Mono (monospace for technical data). Replace Inter.
+- **Triple-Theme**: Dark (default, Linear-style), Light (Clean/Apple), Sepia (Premium Paper/E-ink).
+- **Logo/Favicon**: SVG-in-code `[ IDCV ]` in JetBrains Mono.
+- **Loading Skeletons**: Must respect active theme colors to prevent flashing.
+
+### Approach
+- Chose: `next-themes` (already installed) with `data-theme` attribute strategy.
+- Chose: CSS Variables for all three themes (`:root` light, `.dark`, `[data-theme='sepia']`).
+- Chose: Geist font (over Inter) for techy aesthetic.
+- Chose: SVG-in-code logo (over external image asset).
+- Chose: Theme switcher in Dashboard header + discreet toggle on Public Profile (Option A).
+- Sepia palette: cream bg `#F5F2E9`, charcoal text `#433422`.
+
+### Constraints
+- Search/replace is **copy-only** — no internal component/variable renames.
+- Sepia uses `[data-theme='sepia']` CSS variables, not a Tailwind variant.
+- SEO canonical metadata targets `idcv.me` origin.

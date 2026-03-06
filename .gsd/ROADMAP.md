@@ -62,12 +62,19 @@
 - Verify hydration consistency for dynamic accent colors.
 
 ### Phase 6: Project Update
-**Status**: ⬜ Not Started
+**Status**: 🔲 Planned
 **Objective**: The New Identity ([ IDCV ] Identity Canvas), Visual & Copy Refinement (Triple-Theme, Fonts), Global Updates, Feature Adjustments & SEO, Implementation Task.
 **Depends on**: Phase 5
 
-**Tasks**:
-- [ ] TBD (run /plan 6 to create)
+**Plans** (6 plans, 4 waves):
+- [ ] 6.1: Theme Infrastructure & Provider (wave 1)
+- [ ] 6.2: Theme Switcher Component (wave 1)
+- [ ] 6.3: Hardcoded Color Migration — Pages (wave 2)
+- [ ] 6.4: Hardcoded Color Migration — Components + Branding (wave 2)
+- [ ] 6.5: Logo, Favicon & Skeleton Loaders (wave 3)
+- [ ] 6.6: SEO Metadata & Final Polish (wave 4)
 
 **Verification**:
-- TBD
+- `npm run build` passes
+- All three themes render correctly in all views
+- No user-facing "Canvas" text, all domain refs show "idcv.me/"
