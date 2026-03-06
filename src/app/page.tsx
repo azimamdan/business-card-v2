@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { IdcvLogo } from "@/components/ui/idcv-logo";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, scaleOnHover } from "@/lib/motion-variants";
 
@@ -23,12 +24,12 @@ export default function LandingPage() {
         className="relative z-10 text-center space-y-8 px-4"
       >
         <div className="space-y-4">
-          <motion.h1
+          <motion.div
             variants={fadeInUp}
-            className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-foreground to-muted-foreground"
+            className="flex justify-center mb-8"
           >
-            Canvas
-          </motion.h1>
+            <IdcvLogo size="lg" />
+          </motion.div>
           <motion.p
             variants={fadeInUp}
             className="text-lg md:text-xl text-muted-foreground font-medium tracking-tight max-w-md mx-auto"
@@ -57,7 +58,7 @@ export default function LandingPage() {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-8 text-[10px] uppercase tracking-[0.2em] text-muted-foreground/50 font-bold"
       >
-        © 2026 Digital Identity Platform
+        © 2026 IDCV
       </motion.div>
     </main>
   );

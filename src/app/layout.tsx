@@ -14,8 +14,8 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Canvas | Digital Identity",
-  description: "Your professional digital persona on a living canvas.",
+  title: "IDCV — Your Modular Identity Canvas",
+  description: "IDCV — Your Modular Identity Canvas. Build your professional identity with modular blocks.",
 };
 
 export default function RootLayout({

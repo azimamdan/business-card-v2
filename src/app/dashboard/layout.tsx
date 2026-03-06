@@ -1,6 +1,7 @@
 import { getProfile } from "@/lib/actions/profile";
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { IdcvLogo } from "@/components/ui/idcv-logo";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
@@ -13,7 +14,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <Link href="/" className="font-bold text-xl tracking-tight text-foreground flex items-center gap-2 hover:opacity-90 transition-opacity">
-                            <div className="w-8 h-8 rounded-lg bg-accent-brand flex items-center justify-center text-sm shadow-glow transition-all duration-300">ID</div>
+                            <IdcvLogo size="sm" />
                             <span className="hidden sm:inline-block">IDCV</span>
                         </Link>
                     </div>
