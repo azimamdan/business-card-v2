@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun, BookOpen } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
@@ -24,7 +24,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
                 className={variant === "default"
                     ? "flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50"
                     : "opacity-0"}
-                style={{ width: variant === "default" ? "108px" : "32px", height: "32px", opacity: variant === "default" ? 1 : 0 }}
+                style={{ width: variant === "default" ? "76px" : "32px", height: "32px", opacity: variant === "default" ? 1 : 0 }}
             />
         );
     }
@@ -34,17 +34,11 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
             <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => {
-                    if (theme === "dark") setTheme("light");
-                    else if (theme === "light") setTheme("sepia");
-                    else setTheme("dark");
-                }}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="h-8 w-8 rounded-full text-muted-foreground hover:text-foreground"
                 title={`Current theme: ${theme}. Click to change.`}
             >
-                {theme === "dark" && <Moon className="h-4 w-4" />}
-                {theme === "light" && <Sun className="h-4 w-4" />}
-                {theme === "sepia" && <BookOpen className="h-4 w-4" />}
+                {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                 <span className="sr-only">Toggle theme</span>
             </Button>
         );
@@ -53,7 +47,6 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
     const themes = [
         { id: "light", icon: Sun },
         { id: "dark", icon: Moon },
-        { id: "sepia", icon: BookOpen },
     ];
 
     return (
@@ -67,8 +60,8 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
                         key={t.id}
                         onClick={() => setTheme(t.id)}
                         className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${isActive
-                                ? "bg-accent-brand text-white shadow-glow"
-                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            ? "bg-accent-brand text-white shadow-glow"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}
                         title={`${t.id} mode`}
                     >
