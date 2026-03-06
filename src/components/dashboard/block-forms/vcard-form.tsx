@@ -88,7 +88,7 @@ export function VCardForm({ blockId, initialData }: { blockId: string, initialDa
             </div>
 
             <div className="flex justify-end pt-2">
-                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-slate-700 text-white border border-input">
+                <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-accent-brand/20 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
                     Save V-Card
                 </Button>

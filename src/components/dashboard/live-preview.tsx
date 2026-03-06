@@ -34,7 +34,7 @@ export function LivePreview({ profile, blocks }: LivePreviewProps) {
             </div>
 
             {/* Preview Body */}
-            <div className="min-h-[500px] max-h-[calc(100vh-250px)] lg:max-h-[calc(100vh-180px)] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-800">
+            <div className="min-h-[500px] max-h-[calc(100vh-250px)] lg:max-h-[calc(100vh-180px)] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-muted">
                 <div className="scale-100 min-h-full pb-12">
 
                     {/* Header mirrored from /[username]/page.tsx */}

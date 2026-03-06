@@ -89,7 +89,7 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
                     <div
                         {...attributes}
                         {...listeners}
-                        className="w-8 h-8 rounded bg-muted flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors"
+                        className="w-8 h-8 rounded bg-muted flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-accent-brand/20 transition-colors"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <GripVertical className="h-4 w-4 text-muted-foreground" />

@@ -113,7 +113,7 @@ export default function SignupPage() {
                             <div className="space-y-2">
                                 <Label htmlFor="slug">Username / Slug</Label>
                                 <div className="relative">
-                                    <span className="absolute left-3 top-2.5 text-muted-foreground text-sm">canvas.to/</span>
+                                    <span className="absolute left-3 top-2.5 text-muted-foreground text-sm">idcv.me/</span>
                                     <Input
                                         id="slug"
                                         placeholder="username"

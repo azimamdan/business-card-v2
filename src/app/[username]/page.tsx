@@ -64,13 +64,13 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
     return (
         <main
-            className="min-h-screen bg-slate-950 text-slate-50"
+            className="min-h-screen bg-background text-foreground"
             style={{ "--accent-brand": accentColor } as React.CSSProperties}
         >
             <div className="max-w-2xl mx-auto px-4 py-12 md:py-20 space-y-12">
                 {/* Profile Header */}
                 <AnimatedSection delay={0.1} className="text-center space-y-4">
-                    <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto flex items-center justify-center border-2 border-[var(--accent-brand)] overflow-hidden shadow-glow transition-all duration-500 relative">
+                    <div className="w-24 h-24 rounded-full bg-muted mx-auto flex items-center justify-center border-2 border-[var(--accent-brand)] overflow-hidden shadow-glow transition-all duration-500 relative">
                         {profile.avatar_url ? (
                             <Image
                                 src={profile.avatar_url}
@@ -88,7 +88,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                     </div>
                     <div className="space-y-2">
                         <h1 className="text-3xl font-bold tracking-tight">{profile.display_name}</h1>
-                        <p className="text-slate-400 max-w-sm mx-auto">{profile.bio}</p>
+                        <p className="text-muted-foreground max-w-sm mx-auto">{profile.bio}</p>
                     </div>
                 </AnimatedSection>
 
@@ -101,7 +101,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                             </AnimatedSection>
                         ))
                     ) : (
-                        <div className="text-center py-12 border-2 border-dashed border-slate-800 rounded-3xl text-slate-500">
+                        <div className="text-center py-12 border-2 border-dashed border-border rounded-3xl text-muted-foreground/50">
                             No blocks added to this canvas yet.
                         </div>
                     )}
@@ -109,8 +109,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
                 {/* Footer */}
                 <footer className="pt-12 pb-6 text-center space-y-6">
-                    <Link href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
-                        <div className="w-2 h-2 rounded-full bg-slate-800" />
+                    <Link href="/" className="inline-flex items-center gap-2 text-xs text-muted-foreground/70 hover:text-accent-brand transition-colors">
+                        <div className="w-2 h-2 rounded-full bg-muted" />
                         Created with IDCV
                     </Link>
                     <div className="flex justify-center">
