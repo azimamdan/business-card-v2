@@ -1,5 +1,6 @@
 import { getProfile } from "@/lib/actions/profile";
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
@@ -31,6 +32,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
                                 </Link>
                             </div>
                         )}
+                        <ThemeSwitcher />
                         <div className="h-6 w-px bg-slate-800 hidden sm:block mx-1" />
                         <span className="text-sm text-slate-400 hidden md:inline truncate max-w-[150px]">
                             {profile?.display_name || 'Welcome'}

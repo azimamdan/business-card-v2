@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { BlockRenderer } from "@/components/canvas";
 import { Block } from "@/lib/types/database";
+import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import Image from "next/image";
 
@@ -104,11 +105,14 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                 </section>
 
                 {/* Footer */}
-                <footer className="pt-12 text-center">
+                <footer className="pt-12 pb-6 text-center space-y-6">
                     <Link href="/" className="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-accent-brand transition-colors">
                         <div className="w-2 h-2 rounded-full bg-slate-800" />
                         Created with Canvas
                     </Link>
+                    <div className="flex justify-center">
+                        <ThemeSwitcher variant="compact" />
+                    </div>
                 </footer>
             </div>
         </main>
