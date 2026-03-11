@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI and internal files
+.agent/
+.claude/
+.gemini/
+.gsd/
+model_capabilities.yaml
+GSD-STYLE.md
+PROJECT_RULES.md
+profile_content.txt
+profile_demo.png
+docs/
+adapters/
+scripts/
+CHANGELOG.md
