@@ -60,7 +60,7 @@ export default function LandingPage() {
           </motion.div>
 
           {!isAuthenticated && (
-            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block py-3 px-6">
               Already have an account? Log in
             </Link>
           )}
