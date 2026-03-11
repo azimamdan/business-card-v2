@@ -15,6 +15,8 @@ import { MarkdownForm } from "./block-forms/markdown-form";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Drawer } from "vaul";
+import { useEffect } from "react";
 
 interface BlockEditorCardProps {
     block: Block;
@@ -26,6 +28,14 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const {
         attributes,
@@ -89,12 +99,12 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
                     <div
                         {...attributes}
                         {...listeners}
-                        className="w-8 h-8 rounded bg-muted flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-accent-brand/20 transition-colors"
+                        className="w-11 h-11 rounded bg-muted flex items-center justify-center shrink-0 cursor-grab active:cursor-grabbing hover:bg-accent-brand/20 transition-colors"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <GripVertical className="h-4 w-4 text-muted-foreground" />
+                        <GripVertical className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <div className="w-8 h-8 rounded bg-card/50 flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 rounded bg-card/50 flex items-center justify-center shrink-0">
                         {getIcon()}
                     </div>
                     <div className="flex-1">
@@ -116,25 +126,56 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
 
                     <Button
                         variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 ml-2 text-muted-foreground hover:text-red-400 hover:bg-red-400/10"
+                        size="icon-touch"
+                        className="text-muted-foreground hover:text-red-400 hover:bg-red-400/10"
                         onClick={() => setShowDeleteConfirm(true)}
                     >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-5 w-5" />
                     </Button>
                 </div>
             </div>
 
-            {/* Collapsible Body */}
-            {isOpen && (
-                <div className="p-4 border-t border-border/50 bg-card/40">
-                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                    {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
-                    {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
-                    {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
-                    {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
-                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
-                </div>
+            {/* Editing Form - Desktop Accordion / Mobile Drawer */}
+            {isMobile ? (
+                <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
+                    <Drawer.Portal>
+                        <Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
+                        <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[32px] h-[85vh] fixed bottom-0 left-0 right-0 z-50 outline-none">
+                            <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
+                            <div className="p-4 overflow-y-auto">
+                                <div className="max-w-md mx-auto">
+                                    <Drawer.Title className="text-xl font-bold mb-1 flex items-center gap-2">
+                                        {getIcon()}
+                                        {getTitle()}
+                                    </Drawer.Title>
+                                    <Drawer.Description className="text-muted-foreground text-sm mb-6">
+                                        Customize your {getTitle()?.toLowerCase()} content.
+                                    </Drawer.Description>
+                                    
+                                    <div className="space-y-6 pb-20">
+                                        {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                                        {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
+                                        {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
+                                        {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
+                                        {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
+                                        {/* eslint-enable @typescript-eslint/no-explicit-any */}
+                                    </div>
+                                </div>
+                            </div>
+                        </Drawer.Content>
+                    </Drawer.Portal>
+                </Drawer.Root>
+            ) : (
+                isOpen && (
+                    <div className="p-4 border-t border-border/50 bg-card/40">
+                        {/* eslint-disable @typescript-eslint/no-explicit-any */}
+                        {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
+                        {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
+                        {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
+                        {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
+                        {/* eslint-enable @typescript-eslint/no-explicit-any */}
+                    </div>
+                )
             )}
 
             {/* Delete Confirmation */}
