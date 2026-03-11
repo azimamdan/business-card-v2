@@ -50,7 +50,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
     ];
 
     return (
-        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50">
+        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 min-w-[100px] w-fit shrink-0">
             {themes.map((t) => {
                 const Icon = t.icon;
                 const isActive = theme === t.id;
@@ -59,7 +59,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
                     <button
                         key={t.id}
                         onClick={() => setTheme(t.id)}
-                        className={`flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 ${isActive
+                        className={`flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 shrink-0 ${isActive
                             ? "bg-accent-brand text-white shadow-glow"
                             : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}

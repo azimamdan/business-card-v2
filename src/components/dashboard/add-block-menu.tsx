@@ -95,9 +95,9 @@ export function AddBlockMenu() {
                 </Drawer.Trigger>
                 <Drawer.Portal>
                     <Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
-                    <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[32px] fixed bottom-0 left-0 right-0 z-50 outline-none">
+                    <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[32px] fixed bottom-0 left-0 right-0 z-50 outline-none h-[85vh]">
                         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                        <div className="p-6">
+                        <div className="p-6 overflow-y-auto">
                             <Drawer.Title className="text-xl font-bold mb-1">Add New Block</Drawer.Title>
                             <Drawer.Description className="text-muted-foreground text-sm mb-6">
                                 Choose a block type to add to your canvas.

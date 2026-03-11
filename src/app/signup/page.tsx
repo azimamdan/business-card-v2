@@ -91,7 +91,7 @@ export default function SignupPage() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
             <motion.div variants={fadeInUp} initial="initial" animate="animate" className="w-full max-w-md">
-                <div className="flex justify-center mb-8">
+                <div className="flex justify-center mb-12">
                     <IdcvLogo size="lg" />
                 </div>
                 <Card className="w-full border-border bg-card text-foreground shadow-2xl shadow-purple-500/10">
