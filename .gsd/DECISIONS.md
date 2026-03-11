@@ -147,3 +147,20 @@
 ### Constraints
 - Maintain premium, minimalist "IDCV" aesthetic while increasing target sizes.
 - Ensure smooth transitions between mobile-native patterns and desktop layouts.
+
+## Phase 4 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- Verify all v1.2 requirements and formally close the milestone.
+- **Branding checklist:** Sweep for `canvas.to`, "Canvas", `<title>`/og: metadata, and `idcv.me` slug prefix.
+- Explicitly re-verify dashboard block editor on mobile and verify no CLS regressions from Phase 2.
+
+### Approach
+- **Combined Audit & Manual Walkthrough:**
+  1. Run the `/audit-milestone` automated workflow first.
+  2. Do a manual end-to-end walkthrough covering: sign-up, avatar upload, block add/reorder on mobile, theme toggle, and vCard download on mobile.
+
+### Constraints
+- Must ensure all traces of old "Canvas" branding are fully purged in codebase and metadata.
