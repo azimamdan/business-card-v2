@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Target, Contact, FolderOutput, FileText, Loader2 } from "lucide-react";
+import { Plus, Target, Contact, FolderOutput, FileText, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -15,13 +15,13 @@ import { addBlock } from "@/lib/actions/blocks";
 import { BlockType, BlockData } from "@/lib/types/database";
 import { motion } from "framer-motion";
 import { scaleOnHover } from "@/lib/motion-variants";
-import { Drawer } from "vaul";
 import { useEffect } from "react";
 
 export function AddBlockMenu() {
     const [isAdding, setIsAdding] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [showSheet, setShowSheet] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -29,6 +29,16 @@ export function AddBlockMenu() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    // Lock body scroll when sheet is open
+    useEffect(() => {
+        if (showSheet) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [showSheet]);
 
     const handleAdd = async (type: BlockType) => {
         setIsAdding(true);
@@ -50,6 +60,7 @@ export function AddBlockMenu() {
             }
             await addBlock(type, defaultData as BlockData);
             setIsOpen(false);
+            setShowSheet(false);
         } catch (error) {
             console.error("Failed to add block", error);
         } finally {
@@ -57,19 +68,26 @@ export function AddBlockMenu() {
         }
     };
 
-    const triggerAndContent = (
-        <>
-            {isAdding ? (
-                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-            ) : (
-                <>
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-accent-brand/20 transition-colors">
-                        <Plus className="h-5 w-5 group-hover:text-accent-brand" />
-                    </div>
-                    <span className="font-medium text-foreground/70 group-hover:text-white">Add New Block</span>
-                </>
-            )}
-        </>
+    const triggerButton = (
+        <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" whileTap="tap">
+            <Button
+                variant="outline"
+                className="w-full h-auto py-6 border-2 border-dashed border-input hover:border-accent-brand hover:text-white bg-card/50 hover:bg-card/80 rounded-2xl flex flex-col gap-2 transition-all duration-300 group"
+                disabled={isAdding}
+                onClick={isMobile ? () => setShowSheet(true) : undefined}
+            >
+                {isAdding ? (
+                    <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                ) : (
+                    <>
+                        <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-accent-brand/20 transition-colors">
+                            <Plus className="h-5 w-5 group-hover:text-accent-brand" />
+                        </div>
+                        <span className="font-medium text-foreground/70 group-hover:text-white">Add New Block</span>
+                    </>
+                )}
+            </Button>
+        </motion.div>
     );
 
     const blockTypeItems = [
@@ -81,65 +99,65 @@ export function AddBlockMenu() {
 
     if (isMobile) {
         return (
-            <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
-                <Drawer.Trigger asChild>
-                    <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" whileTap="tap">
-                        <Button
-                            variant="outline"
-                            className="w-full h-auto py-6 border-2 border-dashed border-input hover:border-accent-brand hover:text-white bg-card/50 hover:bg-card/80 rounded-2xl flex flex-col gap-2 transition-all duration-300 group"
-                            disabled={isAdding}
+            <>
+                {triggerButton}
+
+                {/* Custom Bottom Sheet */}
+                {showSheet && (
+                    <div className="fixed inset-0 z-[100]">
+                        {/* Backdrop */}
+                        <div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            onClick={() => setShowSheet(false)}
+                        />
+
+                        {/* Sheet Content */}
+                        <div
+                            className="absolute bottom-0 left-0 right-0 bg-card border-t border-border rounded-t-[32px] animate-in slide-in-from-bottom duration-300"
+                            style={{ maxHeight: '85vh' }}
                         >
-                            {triggerAndContent}
-                        </Button>
-                    </motion.div>
-                </Drawer.Trigger>
-                <Drawer.Portal>
-                    <Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
-                    <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[32px] fixed bottom-0 left-0 right-0 z-50 outline-none h-[85vh]">
-                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                        <div className="p-6 overflow-y-auto">
-                            <Drawer.Title className="text-xl font-bold mb-1">Add New Block</Drawer.Title>
-                            <Drawer.Description className="text-muted-foreground text-sm mb-6">
-                                Choose a block type to add to your canvas.
-                            </Drawer.Description>
-                            
-                            <div className="space-y-4">
-                                {blockTypeItems.map((item) => (
-                                    <button
-                                        key={item.type}
-                                        onClick={() => handleAdd(item.type)}
-                                        className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors text-left border border-transparent hover:border-border"
-                                    >
-                                        <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                                            {item.icon}
-                                        </div>
-                                        <div>
-                                            <p className="font-semibold">{item.label}</p>
-                                            <p className="text-xs text-muted-foreground">{item.description}</p>
-                                        </div>
-                                    </button>
-                                ))}
+                            <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
+                            <div className="px-6 pb-6 overflow-y-auto" style={{ maxHeight: 'calc(85vh - 40px)' }}>
+                                <div className="flex items-center justify-between mb-1">
+                                    <h2 className="text-xl font-bold">Add New Block</h2>
+                                    <Button variant="ghost" size="icon" onClick={() => setShowSheet(false)}>
+                                        <X className="h-5 w-5" />
+                                    </Button>
+                                </div>
+                                <p className="text-muted-foreground text-sm mb-6">
+                                    Choose a block type to add to your canvas.
+                                </p>
+
+                                <div className="space-y-4">
+                                    {blockTypeItems.map((item) => (
+                                        <button
+                                            key={item.type}
+                                            onClick={() => handleAdd(item.type)}
+                                            className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors text-left border border-transparent hover:border-border"
+                                        >
+                                            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
+                                                {item.icon}
+                                            </div>
+                                            <div>
+                                                <p className="font-semibold">{item.label}</p>
+                                                <p className="text-xs text-muted-foreground">{item.description}</p>
+                                            </div>
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="h-10" /> {/* Spacer */}
                             </div>
-                            <div className="h-10" /> {/* Spacer */}
                         </div>
-                    </Drawer.Content>
-                </Drawer.Portal>
-            </Drawer.Root>
+                    </div>
+                )}
+            </>
         );
     }
 
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" whileTap="tap">
-                    <Button
-                        variant="outline"
-                        className="w-full h-auto py-6 border-2 border-dashed border-input hover:border-accent-brand hover:text-white bg-card/50 hover:bg-card/80 rounded-2xl flex flex-col gap-2 transition-all duration-300 group"
-                        disabled={isAdding}
-                    >
-                        {triggerAndContent}
-                    </Button>
-                </motion.div>
+                {triggerButton}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" className="w-[300px] bg-card border-border text-foreground">
                 <DropdownMenuLabel className="text-muted-foreground font-normal text-xs uppercase tracking-wider">Choose Block Type</DropdownMenuLabel>

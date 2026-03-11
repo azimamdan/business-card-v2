@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Block } from "@/lib/types/database";
-import { Target, Contact, FolderOutput, FileText, ChevronDown, Trash2, GripVertical } from "lucide-react";
+import { Target, Contact, FolderOutput, FileText, ChevronDown, Trash2, GripVertical, X } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { deleteBlock, toggleBlockVisibility } from "@/lib/actions/blocks";
@@ -15,7 +15,6 @@ import { MarkdownForm } from "./block-forms/markdown-form";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Drawer } from "vaul";
 import { useEffect } from "react";
 
 interface BlockEditorCardProps {
@@ -36,6 +35,16 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    // Lock body scroll when internal drawer is open
+    useEffect(() => {
+        if (isMobile && isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [isOpen, isMobile]);
 
     const {
         attributes,
@@ -137,20 +146,34 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
 
             {/* Editing Form - Desktop Accordion / Mobile Drawer */}
             {isMobile ? (
-                <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
-                    <Drawer.Portal>
-                        <Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
-                        <Drawer.Content className="bg-card border-t border-border flex flex-col rounded-t-[32px] h-[85vh] fixed bottom-0 left-0 right-0 z-50 outline-none">
+                isOpen && (
+                    <div className="fixed inset-0 z-[100]">
+                        {/* Backdrop */}
+                        <div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            onClick={() => setIsOpen(false)}
+                        />
+
+                        {/* Sheet Content */}
+                        <div
+                            className="absolute bottom-0 left-0 right-0 bg-card border-t border-border rounded-t-[32px] animate-in slide-in-from-bottom duration-300"
+                            style={{ maxHeight: '85vh' }}
+                        >
                             <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                            <div className="p-4 overflow-y-auto">
+                            <div className="px-4 pb-4 overflow-y-auto" style={{ maxHeight: 'calc(85vh - 40px)' }}>
                                 <div className="max-w-md mx-auto">
-                                    <Drawer.Title className="text-xl font-bold mb-1 flex items-center gap-2">
-                                        {getIcon()}
-                                        {getTitle()}
-                                    </Drawer.Title>
-                                    <Drawer.Description className="text-muted-foreground text-sm mb-6">
+                                    <div className="flex items-center justify-between mb-1">
+                                        <h2 className="text-xl font-bold flex items-center gap-2">
+                                            {getIcon()}
+                                            {getTitle()}
+                                        </h2>
+                                        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                                            <X className="h-5 w-5" />
+                                        </Button>
+                                    </div>
+                                    <p className="text-muted-foreground text-sm mb-6">
                                         Customize your {getTitle()?.toLowerCase()} content.
-                                    </Drawer.Description>
+                                    </p>
                                     
                                     <div className="space-y-6 pb-20">
                                         {/* eslint-disable @typescript-eslint/no-explicit-any */}
@@ -162,9 +185,9 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
                                     </div>
                                 </div>
                             </div>
-                        </Drawer.Content>
-                    </Drawer.Portal>
-                </Drawer.Root>
+                        </div>
+                    </div>
+                )
             ) : (
                 isOpen && (
                     <div className="p-4 border-t border-border/50 bg-card/40">
