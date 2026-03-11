@@ -1,18 +1,28 @@
 # ROADMAP.md
 
-> **Current Phase**: Phase 1 — v1.2 Planning
-> **Milestone**: v1.2
+> **Current Milestone**: v1.2
+> **Goal**: Refine the minimalist "Identity Canvas" with optimal performance and premium mobile UX.
 
-## Must-Haves (from SPEC)
-- [ ] Refine Minimalist Landing Page
-- [ ] Image optimization for uploaded avatars
-- [ ] Final mobile-first responsiveness polish
+## Must-Haves
+- [ ] **Landing Page Refinement**: Formalize and polish the manual minimalist splash page.
+- [ ] **Image Optimization**: Integrate `next/image` with Supabase Storage for all assets.
+- [ ] **Mobile UX Audit**: Comprehensive responsiveness fixes for editor and profile.
+- [ ] **Technical Debt**: Ensure branding consistency (`idcv.me`) and v1.1 handover.
 
 ## Phases
 
-### Phase 1: v1.2 Planning & Cleanup
-**Status**: 🗓️ Not Started
-**Objective**: Plan the next iteration focusing on the minimalist pivot and closing technical debt from v1.1.
-- Audit mobile responsiveness of the simplified landing page.
-- Research optimal image processing for Supabase Storage uploads.
-- Define new Phase 7 (Pivot) goals.
+### Phase 1: Landing Page Refinement
+**Status**: ⬜ Not Started
+**Objective**: Finalize the minimalist landing page design, copy, and "Get Started" flow.
+
+### Phase 2: Image & Performance Optimization
+**Status**: ⬜ Not Started
+**Objective**: Implement `next/image`, optimize storage uploads, and hit performance targets.
+
+### Phase 3: Mobile UX Polish & Audit
+**Status**: ⬜ Not Started
+**Objective**: Fix all mobile-specific layout issues and interaction glitches.
+
+### Phase 4: Final Verification & Closure
+**Status**: ⬜ Not Started
+**Objective**: Verify all v1.2 requirements and formally close the milestone.
