@@ -130,3 +130,20 @@
 
 ### Constraints
 - Ensure layouts do not break with the `fill` + `object-cover` pattern.
+## Phase 3 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- **Priority Areas**: 1. Dashboard Block Editor, 2. Public Profile, 3. Landing Page.
+- **Touch Targets**: Hard rule: All interactive elements must be minimum 44x44px.
+- **Acceptance Criteria**: Zero Layout Shift (CLS) from `next/image` on mobile viewports.
+
+### Approach
+- **Strategy**: Option B (CSS refinements + mobile-native interaction patterns).
+- **Mobile Patterns**: Implement bottom sheets (vaul) for block editing forms on mobile devices to replace desktop-side-panel/modal paradigms.
+- **Audit**: Systematic audit of all clickable elements for touch-target compliance.
+
+### Constraints
+- Maintain premium, minimalist "IDCV" aesthetic while increasing target sizes.
+- Ensure smooth transitions between mobile-native patterns and desktop layouts.
