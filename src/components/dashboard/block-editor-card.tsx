@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Block } from "@/lib/types/database";
-import { Target, Contact, FolderOutput, FileText, ChevronDown, Trash2, GripVertical, X } from "lucide-react";
+import { Target, Contact, FolderOutput, FileText, ChevronDown, Trash2, GripVertical } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { deleteBlock, toggleBlockVisibility } from "@/lib/actions/blocks";
@@ -14,6 +14,13 @@ import {
     DialogHeader, 
     DialogTitle 
 } from "@/components/ui/dialog";
+import {
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerDescription,
+} from "@/components/ui/drawer";
 
 import { HeroForm } from "./block-forms/hero-form";
 import { VCardForm } from "./block-forms/vcard-form";
@@ -90,6 +97,17 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
         }
     };
 
+    const blockForm = (
+        <>
+            {/* eslint-disable @typescript-eslint/no-explicit-any */}
+            {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
+            {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
+            {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
+            {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
+            {/* eslint-enable @typescript-eslint/no-explicit-any */}
+        </>
+    );
+
     return (
         <div
             ref={setNodeRef}
@@ -143,52 +161,28 @@ export function BlockEditorCard({ block }: BlockEditorCardProps) {
 
             {/* Editing Form - Desktop Accordion / Mobile Drawer */}
             {isMobile ? (
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogContent className="fixed bottom-0 top-auto translate-y-0 sm:bottom-0 sm:top-auto sm:translate-y-0 w-full max-w-full sm:max-w-full p-0 gap-0 border-x-0 border-b-0 border-t border-border rounded-t-[32px] bg-card outline-none overflow-hidden duration-300 animate-in slide-in-from-bottom">
-                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                        <div className="px-4 pb-8 overflow-y-auto max-h-[80vh]">
-                            <div className="max-w-md mx-auto">
-                                <DialogHeader className="text-left mb-6">
-                                    <div className="flex items-center justify-between">
-                                        <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                                            {getIcon()}
-                                            {getTitle()}
-                                        </DialogTitle>
-                                        <Button 
-                                            variant="ghost" 
-                                            size="icon" 
-                                            onClick={() => setIsOpen(false)}
-                                            className="h-8 w-8 rounded-full"
-                                        >
-                                            <X className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                    <DialogDescription className="text-muted-foreground text-sm">
-                                        Customize your {getTitle()?.toLowerCase()} content.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                
-                                <div className="space-y-6 pb-20">
-                                    {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                                    {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
-                                    {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
-                                    {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
-                                    {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
-                                    {/* eslint-enable @typescript-eslint/no-explicit-any */}
-                                </div>
+                <Drawer open={isOpen} onOpenChange={setIsOpen}>
+                    <DrawerContent className="max-h-[85vh]">
+                        <DrawerHeader className="text-left">
+                            <DrawerTitle className="text-xl font-bold flex items-center gap-2">
+                                {getIcon()}
+                                {getTitle()}
+                            </DrawerTitle>
+                            <DrawerDescription>
+                                Customize your {getTitle()?.toLowerCase()} content.
+                            </DrawerDescription>
+                        </DrawerHeader>
+                        <div className="px-6 pb-8 overflow-y-auto">
+                            <div className="max-w-md mx-auto space-y-6 pb-20">
+                                {blockForm}
                             </div>
                         </div>
-                    </DialogContent>
-                </Dialog>
+                    </DrawerContent>
+                </Drawer>
             ) : (
                 isOpen && (
                     <div className="p-4 border-t border-border/50 bg-card/40">
-                        {/* eslint-disable @typescript-eslint/no-explicit-any */}
-                        {block.type === 'hero' && <HeroForm blockId={block.id} initialData={block.data as any} />}
-                        {block.type === 'vcard' && <VCardForm blockId={block.id} initialData={block.data as any} />}
-                        {block.type === 'project' && <ProjectForm blockId={block.id} initialData={block.data as any} />}
-                        {block.type === 'markdown' && <MarkdownForm blockId={block.id} initialData={block.data as any} />}
-                        {/* eslint-enable @typescript-eslint/no-explicit-any */}
+                        {blockForm}
                     </div>
                 )
             )}

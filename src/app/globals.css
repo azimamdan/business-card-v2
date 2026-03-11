@@ -128,3 +128,44 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Vaul drawer overrides for Tailwind v4 CSS layer compatibility */
+[data-vaul-drawer] {
+  touch-action: none;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-drawer][data-vaul-drawer-direction="bottom"][data-state="open"] {
+  animation: vaul-slide-from-bottom 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-drawer][data-vaul-drawer-direction="bottom"][data-state="closed"] {
+  animation: vaul-slide-to-bottom 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-overlay][data-state="open"] {
+  animation: vaul-fade-in 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-vaul-overlay][data-state="closed"] {
+  animation: vaul-fade-out 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes vaul-slide-from-bottom {
+  from { transform: translate3d(0, 100%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes vaul-slide-to-bottom {
+  to { transform: translate3d(0, 100%, 0); }
+}
+
+@keyframes vaul-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vaul-fade-out {
+  to { opacity: 0; }
+}

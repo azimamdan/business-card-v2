@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Target, Contact, FolderOutput, FileText, Loader2, X } from "lucide-react";
+import { Plus, Target, Contact, FolderOutput, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -12,12 +12,12 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogDescription,
-} from "@/components/ui/dialog";
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerDescription,
+} from "@/components/ui/drawer";
 import { addBlock } from "@/lib/actions/blocks";
 import { BlockType, BlockData } from "@/lib/types/database";
 import { motion } from "framer-motion";
@@ -99,27 +99,16 @@ export function AddBlockMenu() {
             <>
                 {triggerButton}
 
-                <Dialog open={showSheet} onOpenChange={setShowSheet}>
-                    <DialogContent className="fixed bottom-0 top-auto translate-y-0 sm:bottom-0 sm:top-auto sm:translate-y-0 w-full max-w-full sm:max-w-full p-0 gap-0 border-x-0 border-b-0 border-t border-border rounded-t-[32px] bg-card outline-none overflow-hidden duration-300 animate-in slide-in-from-bottom">
-                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                        <div className="px-6 pb-8 overflow-y-auto max-h-[80vh]">
-                            <DialogHeader className="text-left mb-6">
-                                <div className="flex items-center justify-between">
-                                    <DialogTitle className="text-xl font-bold">Add New Block</DialogTitle>
-                                    <Button 
-                                        variant="ghost" 
-                                        size="icon" 
-                                        onClick={() => setShowSheet(false)}
-                                        className="h-8 w-8 rounded-full"
-                                    >
-                                        <X className="h-4 w-4" />
-                                    </Button>
-                                </div>
-                                <DialogDescription className="text-muted-foreground text-sm">
-                                    Choose a block type to add to your canvas.
-                                </DialogDescription>
-                            </DialogHeader>
+                <Drawer open={showSheet} onOpenChange={setShowSheet}>
+                    <DrawerContent>
+                        <DrawerHeader className="text-left">
+                            <DrawerTitle className="text-xl font-bold">Add New Block</DrawerTitle>
+                            <DrawerDescription>
+                                Choose a block type to add to your canvas.
+                            </DrawerDescription>
+                        </DrawerHeader>
 
+                        <div className="px-6 pb-8">
                             <div className="space-y-4">
                                 {blockTypeItems.map((item) => (
                                     <button
@@ -138,8 +127,8 @@ export function AddBlockMenu() {
                                 ))}
                             </div>
                         </div>
-                    </DialogContent>
-                </Dialog>
+                    </DrawerContent>
+                </Drawer>
             </>
         );
     }

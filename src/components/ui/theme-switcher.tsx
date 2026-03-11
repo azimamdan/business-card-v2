@@ -24,7 +24,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
                 className={variant === "default"
                     ? "flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 shrink-0"
                     : "opacity-0 shrink-0"}
-                style={{ width: variant === "default" ? "100px" : "44px", height: "44px", opacity: variant === "default" ? 1 : 0 }}
+                style={{ width: variant === "default" ? "120px" : "44px", height: "56px", opacity: variant === "default" ? 1 : 0 }}
             />
         );
     }
@@ -50,7 +50,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
     ];
 
     return (
-        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 min-w-[100px] w-[100px] shrink-0 overflow-hidden">
+        <div className="flex items-center gap-1.5 bg-muted/50 p-1 rounded-full border border-border/50 w-fit shrink-0 overflow-hidden">
             {themes.map((t) => {
                 const Icon = t.icon;
                 const isActive = theme === t.id;
@@ -59,13 +59,13 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
                     <button
                         key={t.id}
                         onClick={() => setTheme(t.id)}
-                        className={`flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 shrink-0 ${isActive
+                        className={`flex items-center justify-center w-[48px] h-[48px] rounded-full transition-all duration-300 shrink-0 ${isActive
                             ? "bg-accent-brand text-white shadow-glow"
                             : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}
                         title={`${t.id} mode`}
                     >
-                        <Icon className="h-4 w-4" />
+                        <Icon className="h-5 w-5" />
                         <span className="sr-only">{t.id} mode</span>
                     </button>
                 );
