@@ -19,7 +19,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
                         {profile && (
                             <div className="flex items-center gap-2">
                                 <Link

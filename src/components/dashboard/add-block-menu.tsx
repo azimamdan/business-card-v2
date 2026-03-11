@@ -11,6 +11,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+} from "@/components/ui/dialog";
 import { addBlock } from "@/lib/actions/blocks";
 import { BlockType, BlockData } from "@/lib/types/database";
 import { motion } from "framer-motion";
@@ -29,16 +36,6 @@ export function AddBlockMenu() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
-
-    // Lock body scroll when sheet is open
-    useEffect(() => {
-        if (showSheet) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-        return () => { document.body.style.overflow = ''; };
-    }, [showSheet]);
 
     const handleAdd = async (type: BlockType) => {
         setIsAdding(true);
@@ -102,54 +99,47 @@ export function AddBlockMenu() {
             <>
                 {triggerButton}
 
-                {/* Custom Bottom Sheet */}
-                {showSheet && (
-                    <div className="fixed inset-0 z-[100]">
-                        {/* Backdrop */}
-                        <div
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                            onClick={() => setShowSheet(false)}
-                        />
-
-                        {/* Sheet Content */}
-                        <div
-                            className="absolute bottom-0 left-0 right-0 bg-card border-t border-border rounded-t-[32px] animate-in slide-in-from-bottom duration-300"
-                            style={{ maxHeight: '85vh' }}
-                        >
-                            <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
-                            <div className="px-6 pb-6 overflow-y-auto" style={{ maxHeight: 'calc(85vh - 40px)' }}>
-                                <div className="flex items-center justify-between mb-1">
-                                    <h2 className="text-xl font-bold">Add New Block</h2>
-                                    <Button variant="ghost" size="icon" onClick={() => setShowSheet(false)}>
-                                        <X className="h-5 w-5" />
+                <Dialog open={showSheet} onOpenChange={setShowSheet}>
+                    <DialogContent className="fixed bottom-0 top-auto translate-y-0 sm:bottom-0 sm:top-auto sm:translate-y-0 w-full max-w-full sm:max-w-full p-0 gap-0 border-x-0 border-b-0 border-t border-border rounded-t-[32px] bg-card outline-none overflow-hidden duration-300 animate-in slide-in-from-bottom">
+                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted my-4" />
+                        <div className="px-6 pb-8 overflow-y-auto max-h-[80vh]">
+                            <DialogHeader className="text-left mb-6">
+                                <div className="flex items-center justify-between">
+                                    <DialogTitle className="text-xl font-bold">Add New Block</DialogTitle>
+                                    <Button 
+                                        variant="ghost" 
+                                        size="icon" 
+                                        onClick={() => setShowSheet(false)}
+                                        className="h-8 w-8 rounded-full"
+                                    >
+                                        <X className="h-4 w-4" />
                                     </Button>
                                 </div>
-                                <p className="text-muted-foreground text-sm mb-6">
+                                <DialogDescription className="text-muted-foreground text-sm">
                                     Choose a block type to add to your canvas.
-                                </p>
+                                </DialogDescription>
+                            </DialogHeader>
 
-                                <div className="space-y-4">
-                                    {blockTypeItems.map((item) => (
-                                        <button
-                                            key={item.type}
-                                            onClick={() => handleAdd(item.type)}
-                                            className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors text-left border border-transparent hover:border-border"
-                                        >
-                                            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                                                {item.icon}
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold">{item.label}</p>
-                                                <p className="text-xs text-muted-foreground">{item.description}</p>
-                                            </div>
-                                        </button>
-                                    ))}
-                                </div>
-                                <div className="h-10" /> {/* Spacer */}
+                            <div className="space-y-4">
+                                {blockTypeItems.map((item) => (
+                                    <button
+                                        key={item.type}
+                                        onClick={() => handleAdd(item.type)}
+                                        className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors text-left border border-transparent hover:border-border group"
+                                    >
+                                        <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0 group-hover:bg-accent-brand/20 transition-colors">
+                                            {item.icon}
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold text-foreground">{item.label}</p>
+                                            <p className="text-xs text-muted-foreground">{item.description}</p>
+                                        </div>
+                                    </button>
+                                ))}
                             </div>
                         </div>
-                    </div>
-                )}
+                    </DialogContent>
+                </Dialog>
             </>
         );
     }

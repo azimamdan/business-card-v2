@@ -22,8 +22,8 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
         return (
             <div
                 className={variant === "default"
-                    ? "flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50"
-                    : "opacity-0"}
+                    ? "flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 shrink-0"
+                    : "opacity-0 shrink-0"}
                 style={{ width: variant === "default" ? "100px" : "44px", height: "44px", opacity: variant === "default" ? 1 : 0 }}
             />
         );
@@ -50,7 +50,7 @@ export function ThemeSwitcher({ variant = "default" }: ThemeSwitcherProps) {
     ];
 
     return (
-        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 min-w-[100px] w-fit shrink-0">
+        <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-full border border-border/50 min-w-[100px] w-[100px] shrink-0 overflow-hidden">
             {themes.map((t) => {
                 const Icon = t.icon;
                 const isActive = theme === t.id;
