@@ -1,29 +1,20 @@
 # STATE.md
 
-> **Current Position**: `MILESTONE v1.2 — Complete`
+> **Current Position**: `MILESTONE v1.2 — Archived`
 > **Last Update**: 2026-03-11
-> **Status**: Active
+> **Status**: Completed
 
 ## Current Position
 - **Milestone**: v1.2
-- **Phase**: 4 (Final Verification & Closure)
-- **Status**: ✅ Completed & Verified
+- **Status**: ✅ Completed & Archived
 
 ## Last Session Summary
-Phase 3 executed successfully. 2 plans, 5 tasks completed. 
-Mobile-native drawers (vaul) implemented for dashboard, touch targets expanded to 44px universally, and zero CLS verified.
+Milestone v1.2 successfully refined the minimalist "Identity Canvas" with optimal performance and premium mobile UX.
+Key achievements:
+- Branding formalization ([ IDCV ] Identity Canvas).
+- Mobile-native interaction patterns (vaul bottom sheets).
+- Image optimization with `next/image` and client-side compression.
+- Zero CLS verified on mobile viewports.
 
-## In-Progress Work
-- **Tests status**: `npm run build` and `npm run lint` passing seamlessly.
-
-## Blockers
-- None.
-
-## Context Dump
-
-### Decisions Made
-- **Milestone v1.2 Execution**: Progressing through the minimalist 4-phase rollout.
-- **Phase 3 Strategy**: Vaul bottom-sheets for mobile editing forms; H-11 standard enforced for button touch targets; zero CLS confirmed.
-
-### Next Steps
-1. Execute Phase 4 via `/execute 4` (Final Verification & Closure)
+## Next Steps
+1. Run `/new-milestone` to plan the next set of features.
