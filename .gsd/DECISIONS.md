@@ -82,19 +82,33 @@
 - **Rebrand**: All user-facing copy from "Canvas" → "[ IDCV ] Identity Canvas". Internal component names stay unchanged.
 - **Domain**: `canvas.to/` → `idcv.me/` in all user-facing slug prefixes.
 - **Fonts**: Geist (primary) + JetBrains Mono (monospace for technical data). Replace Inter.
-- **Triple-Theme**: Dark (default, Linear-style), Light (Clean/Apple), Sepia (Premium Paper/E-ink).
+- **Triple-Theme**: Dark (default, Linear-style), Light (Clean/Apple).
 - **Logo/Favicon**: SVG-in-code `[ IDCV ]` in JetBrains Mono.
 - **Loading Skeletons**: Must respect active theme colors to prevent flashing.
 
 ### Approach
 - Chose: `next-themes` (already installed) with `data-theme` attribute strategy.
-- Chose: CSS Variables for all three themes (`:root` light, `.dark`, `[data-theme='sepia']`).
+- Chose: CSS Variables for both themes (`:root` light, `.dark`).
 - Chose: Geist font (over Inter) for techy aesthetic.
 - Chose: SVG-in-code logo (over external image asset).
 - Chose: Theme switcher in Dashboard header + discreet toggle on Public Profile (Option A).
-- Sepia palette: cream bg `#F5F2E9`, charcoal text `#433422`.
 
 ### Constraints
 - Search/replace is **copy-only** — no internal component/variable renames.
-- Sepia uses `[data-theme='sepia']` CSS variables, not a Tailwind variant.
-- SEO canonical metadata targets `idcv.me` origin.
+
+## Phase 1 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- **Sepia Theme**: Removed from project scope entirely. The application will remain Dual-Theme (Light/Dark).
+- **Landing Page**: Keep sparse, minimalist design. No secondary tagline added.
+- **Branding Audit**: Extended to include `canvas.to` domain references and all Metadata/OG tags.
+
+### Approach
+- **Session Awareness**: Option B (Change button text to "Go to Dashboard" if authenticated) instead of silent redirect.
+- **Optimization**: Use `will-change: transform, opacity` for the landing page glow effect to ensure mobile performance.
+
+### Constraints
+- Must maintain ultra-minimalist aesthetic.
+- Branding must be consistent with `[ IDCV ] Identity Canvas` and `idcv.me`.
