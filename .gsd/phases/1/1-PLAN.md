@@ -4,10 +4,10 @@ plan: 1
 wave: 1
 ---
 
-# Plan 1.1: Landing Page & Theme Refinement
+# Plan 1.1: Landing Page Refinement
 
 ## Objective
-Finalize the minimalist landing page design, implement the triple-theme system (adding Sepia), and polish the "Get Started" flow.
+Finalize the minimalist landing page design and polish the "Get Started" flow.
 
 ## Context
 - .gsd/SPEC.md
@@ -20,40 +20,39 @@ Finalize the minimalist landing page design, implement the triple-theme system (
 ## Tasks
 
 <task type="auto">
-  <name>Implement Triple-Theme (Sepia)</name>
-  <files>src/app/globals.css, src/app/layout.tsx</files>
+  <name>Refine Theme Variables</name>
+  <files>src/app/globals.css</files>
   <action>
-    - Define `.sepia` theme variables in `globals.css` using the values: bg `#F5F2E9`, text `#433422`.
-    - Map other semantic variables (primary, muted, accent, etc.) to harmonious sepia tones.
-    - Update `ThemeProvider` in `layout.tsx` to include `sepia` in the `themes` array.
+    - Review and refine light/dark theme variables for optimal contrast and "premium" feel.
+    - Ensure consistent naming and values across both themes.
   </action>
-  <verify>Check `globals.css` for `.sepia` and `layout.tsx` for `ThemeProvider` update.</verify>
-  <done>Sepia theme variables exist and theme provider allows sepia selection.</done>
+  <verify>Check `globals.css` for clean theme variable definitions.</verify>
+  <done>Theme variables are refined and consistent.</done>
 </task>
 
 <task type="auto">
   <name>Refine Minimalist Landing Page</name>
   <files>src/app/page.tsx</files>
   <action>
-    - Add sub-headline to the landing page explaining the "Digital Identity Canvas" concept (Resume, Portfolio, V-Card).
-    - Enhance typography (weight/spacing) for a premium minimalist feel.
-    - Implement a session check: If a user is logged in, show "Go to Dashboard" and link to `/dashboard`.
-    - Add a subtle visual refinement (e.g., optimized glow or faint texture) to the background.
+    - Ensure copy remains sparse (minimalist logo + tagline).
+    - Implement Option B session check: If logged in, change "Get Started" to "Go to Dashboard" and update link.
+    - Optimize background glow with `will-change: transform, opacity`.
   </action>
-  <verify>Run `npm run build` and `npm run lint`.</verify>
-  <done>Landing page copy is complete, layout is polished, and session logic is implemented.</done>
+  <verify>Check landing page with and without authenticated session.</verify>
+  <done>Landing page is optimized, session-aware, and meets minimalist bar.</done>
 </task>
 
 <task type="auto">
-  <name>Technical Debt & Branding Audit</name>
-  <files>src/app/signup/page.tsx, src/app/login/page.tsx</files>
+  <name>Extended Branding & Metadata Audit</name>
+  <files>src/app/layout.tsx, src/app/login/page.tsx, src/app/signup/page.tsx</files>
   <action>
-    - Audit `signup` and `login` pages for consistent `IdcvLogo` usage and branding.
-    - Search for and replace any remaining "Canvas" text with "[ IDCV ] Identity Canvas" in user-facing copy.
-    - Verify mobile responsiveness of auth forms.
+    - Sweep codebase for `canvas.to` and replace with `idcv.me`.
+    - Replace all user-facing "Canvas" with "[ IDCV ] Identity Canvas".
+    - Audit `src/app/layout.tsx` metadata and OG tags for branding consistency.
+    - Ensure `IdcvLogo` usage is standard across auth pages.
   </action>
-  <verify>Search for "Canvas" in `src/app`. Run `npm run lint`.</verify>
-  <done>All branding is consistent and auth pages are polished.</done>
+  <verify>Grep for "canvas.to" and "Canvas". Inspect layout metadata.</verify>
+  <done>All branding (copy/links/metadata/og) is synchronized to IDCV.</done>
 </task>
 
 ## Success Criteria
