@@ -58,7 +58,7 @@ export function SetupForm() {
                 </div>
                 <CardTitle className="text-2xl font-bold text-white">Claim your space</CardTitle>
                 <CardDescription className="text-muted-foreground">
-                    Set up your identity canvas in seconds.
+                    Set up your [ IDCV ] Identity Canvas in seconds.
                 </CardDescription>
             </CardHeader>
             <CardContent>

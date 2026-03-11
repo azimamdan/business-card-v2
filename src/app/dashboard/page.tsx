@@ -57,7 +57,7 @@ export default async function DashboardPage() {
                 <div className="flex items-center justify-between">
                     <div>
                         <h2 className="text-2xl font-bold text-foreground mb-2">Blocks</h2>
-                        <p className="text-muted-foreground">Build your canvas by adding and ordering components.</p>
+                        <p className="text-muted-foreground">Build your [ IDCV ] Identity Canvas by adding and ordering components.</p>
                     </div>
                 </div>
 
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
             <section className="space-y-6">
                 <div>
                     <h2 className="text-2xl font-bold text-foreground mb-2">Publishing</h2>
-                    <p className="text-muted-foreground">Control who can see your canvas.</p>
+                    <p className="text-muted-foreground">Control who can see your [ IDCV ] Identity Canvas.</p>
                 </div>
                 <PublishToggle profile={profile} />
             </section>

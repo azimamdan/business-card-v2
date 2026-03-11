@@ -6,6 +6,7 @@ import { HeroData } from "@/lib/types/database";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ImageUploadWidget } from "../image-upload-widget";
 import { Loader2 } from "lucide-react";
 
 export function HeroForm({ blockId, initialData }: { blockId: string, initialData: HeroData }) {
@@ -43,15 +44,13 @@ export function HeroForm({ blockId, initialData }: { blockId: string, initialDat
                     className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                 />
             </div>
-            <div className="space-y-2">
-                <Label>Avatar URL (Optional)</Label>
-                <Input
-                    value={data.avatarUrl || ""}
-                    onChange={e => setData({ ...data, avatarUrl: e.target.value })}
-                    placeholder="https://example.com/image.jpg"
-                    className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
-                />
-            </div>
+            
+            <ImageUploadWidget
+                label="Avatar Image"
+                value={data.avatarUrl}
+                onChange={url => setData({ ...data, avatarUrl: url })}
+            />
+
             <div className="flex justify-end pt-2">
                 <Button type="submit" disabled={isSaving} size="sm" className="bg-muted hover:bg-accent-brand/20 text-white border border-input">
                     {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}

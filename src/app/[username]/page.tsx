@@ -102,7 +102,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                         ))
                     ) : (
                         <div className="text-center py-12 border-2 border-dashed border-border rounded-3xl text-muted-foreground/50">
-                            No blocks added to this canvas yet.
+                            No blocks added to your [ IDCV ] Identity Canvas yet.
                         </div>
                     )}
                 </section>

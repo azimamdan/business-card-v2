@@ -82,19 +82,85 @@
 - **Rebrand**: All user-facing copy from "Canvas" → "[ IDCV ] Identity Canvas". Internal component names stay unchanged.
 - **Domain**: `canvas.to/` → `idcv.me/` in all user-facing slug prefixes.
 - **Fonts**: Geist (primary) + JetBrains Mono (monospace for technical data). Replace Inter.
-- **Triple-Theme**: Dark (default, Linear-style), Light (Clean/Apple), Sepia (Premium Paper/E-ink).
+- **Triple-Theme**: Dark (default, Linear-style), Light (Clean/Apple).
 - **Logo/Favicon**: SVG-in-code `[ IDCV ]` in JetBrains Mono.
 - **Loading Skeletons**: Must respect active theme colors to prevent flashing.
 
 ### Approach
 - Chose: `next-themes` (already installed) with `data-theme` attribute strategy.
-- Chose: CSS Variables for all three themes (`:root` light, `.dark`, `[data-theme='sepia']`).
+- Chose: CSS Variables for both themes (`:root` light, `.dark`).
 - Chose: Geist font (over Inter) for techy aesthetic.
 - Chose: SVG-in-code logo (over external image asset).
 - Chose: Theme switcher in Dashboard header + discreet toggle on Public Profile (Option A).
-- Sepia palette: cream bg `#F5F2E9`, charcoal text `#433422`.
 
 ### Constraints
 - Search/replace is **copy-only** — no internal component/variable renames.
-- Sepia uses `[data-theme='sepia']` CSS variables, not a Tailwind variant.
-- SEO canonical metadata targets `idcv.me` origin.
+
+## Phase 1 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- **Sepia Theme**: Removed from project scope entirely. The application will remain Dual-Theme (Light/Dark).
+- **Landing Page**: Keep sparse, minimalist design. No secondary tagline added.
+- **Branding Audit**: Extended to include `canvas.to` domain references and all Metadata/OG tags.
+
+### Approach
+- **Session Awareness**: Option B (Change button text to "Go to Dashboard" if authenticated) instead of silent redirect.
+- **Optimization**: Use `will-change: transform, opacity` for the landing page glow effect to ensure mobile performance.
+
+### Constraints
+- Must maintain ultra-minimalist aesthetic.
+- Branding must be consistent with `[ IDCV ] Identity Canvas` and `idcv.me`.
+
+## Phase 2 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- Optimize all image types (avatars, project thumbnails, image blocks).
+- Target 90+ Lighthouse on public profiles, prioritizing LCP.
+- No migration of existing images; applies to new uploads only.
+
+### Approach
+- Chose: Option A (Client-side compression before upload).
+- Details: Max ~800px / 200KB compression before uploading to Supabase Storage.
+- Standard pattern: Use `next/image` with `fill` + `object-cover` for all dynamic images.
+- Configuration: Add Supabase domain to `remotePatterns` in Next.js config.
+
+### Constraints
+- Ensure layouts do not break with the `fill` + `object-cover` pattern.
+## Phase 3 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- **Priority Areas**: 1. Dashboard Block Editor, 2. Public Profile, 3. Landing Page.
+- **Touch Targets**: Hard rule: All interactive elements must be minimum 44x44px.
+- **Acceptance Criteria**: Zero Layout Shift (CLS) from `next/image` on mobile viewports.
+
+### Approach
+- **Strategy**: Option B (CSS refinements + mobile-native interaction patterns).
+- **Mobile Patterns**: Implement bottom sheets (vaul) for block editing forms on mobile devices to replace desktop-side-panel/modal paradigms.
+- **Audit**: Systematic audit of all clickable elements for touch-target compliance.
+
+### Constraints
+- Maintain premium, minimalist "IDCV" aesthetic while increasing target sizes.
+- Ensure smooth transitions between mobile-native patterns and desktop layouts.
+
+## Phase 4 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- Verify all v1.2 requirements and formally close the milestone.
+- **Branding checklist:** Sweep for `canvas.to`, "Canvas", `<title>`/og: metadata, and `idcv.me` slug prefix.
+- Explicitly re-verify dashboard block editor on mobile and verify no CLS regressions from Phase 2.
+
+### Approach
+- **Combined Audit & Manual Walkthrough:**
+  1. Run the `/audit-milestone` automated workflow first.
+  2. Do a manual end-to-end walkthrough covering: sign-up, avatar upload, block add/reorder on mobile, theme toggle, and vCard download on mobile.
+
+### Constraints
+- Must ensure all traces of old "Canvas" branding are fully purged in codebase and metadata.

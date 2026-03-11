@@ -13,6 +13,7 @@ import { Loader2 } from "lucide-react";
 import { RESERVED_SLUGS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { fadeInUp } from "@/lib/motion-variants";
+import { IdcvLogo } from "@/components/ui/idcv-logo";
 
 export default function SignupPage() {
     const [email, setEmail] = useState("");
@@ -90,11 +91,14 @@ export default function SignupPage() {
     return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
             <motion.div variants={fadeInUp} initial="initial" animate="animate" className="w-full max-w-md">
+                <div className="flex justify-center mb-12">
+                    <IdcvLogo size="lg" />
+                </div>
                 <Card className="w-full border-border bg-card text-foreground shadow-2xl shadow-purple-500/10">
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold tracking-tight">Create an account</CardTitle>
                         <CardDescription className="text-muted-foreground">
-                            Start building your digital identity canvas today
+                            Start building your [ IDCV ] Identity Canvas today
                         </CardDescription>
                     </CardHeader>
                     <CardContent>

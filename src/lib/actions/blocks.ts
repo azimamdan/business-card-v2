@@ -170,3 +170,30 @@ export async function reorderBlocks(orderedIds: string[]) {
     revalidatePath('/dashboard');
     return { success: true };
 }
+
+export async function uploadBlockImage(formData: FormData) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("Unauthorized");
+
+    const file = formData.get('file') as File;
+    if (!file) throw new Error("No file provided");
+
+    const fileExt = file.name.split('.').pop() || 'png';
+    const filePath = `${user.id}/blocks/${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file, { upsert: true });
+
+    if (uploadError) throw new Error(uploadError.message);
+
+    const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(filePath);
+
+    // append timestamp to force refresh cache
+    const urlWithTimestamp = `${publicUrl}?t=${Date.now()}`;
+
+    return { url: urlWithTimestamp };
+}

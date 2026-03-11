@@ -1,12 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IdcvLogo } from "@/components/ui/idcv-logo";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, scaleOnHover } from "@/lib/motion-variants";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LandingPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background Glow */}
@@ -14,6 +25,7 @@ export default function LandingPage() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
+        style={{ willChange: "transform, opacity" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--accent-brand)]/10 rounded-full blur-[120px] pointer-events-none"
       />
 
@@ -41,13 +53,17 @@ export default function LandingPage() {
         <motion.div variants={fadeInUp} className="flex flex-col items-center gap-4">
           <motion.div variants={scaleOnHover} initial="rest" whileHover="hover" whileTap="tap">
             <Button asChild size="lg" className="px-8 h-12 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-300 rounded-full font-bold text-lg shadow-xl shadow-white/5">
-              <Link href="/signup">Get Started</Link>
+              <Link href={isAuthenticated ? "/dashboard" : "/signup"}>
+                {isAuthenticated ? "Go to Dashboard" : "Get Started"}
+              </Link>
             </Button>
           </motion.div>
 
-          <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Already have an account? Log in
-          </Link>
+          {!isAuthenticated && (
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block py-3 px-6">
+              Already have an account? Log in
+            </Link>
+          )}
         </motion.div>
       </motion.div>
 
