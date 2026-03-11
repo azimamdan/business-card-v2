@@ -11,12 +11,17 @@
 
 ## Phases
 
+## Current Position
+- **Milestone**: v1.2
+- **Phase**: 2 (Image & Performance Optimization)
+- **Status**: ✅ Completed
+
 ### Phase 1: Landing Page Refinement
 **Goal**: Finalize minimalist landing page design, remove remaining "Canvas" branding, implement session check.
 **Status**: ✅ Completed
 
 ### Phase 2: Image & Performance Optimization
-**Status**: ⬜ Not Started
+**Status**: ✅ Completed
 **Objective**: Implement `next/image`, optimize storage uploads, and hit performance targets.
 
 ### Phase 3: Mobile UX Polish & Audit

@@ -5,6 +5,7 @@ import { Loader2, Camera } from "lucide-react";
 import { updateAvatar } from "@/lib/actions/profile";
 import { Profile } from "@/lib/types/database";
 import Image from "next/image";
+import imageCompression from "browser-image-compression";
 
 export function AvatarUpload({ profile }: { profile: Profile }) {
     const [isUploading, setIsUploading] = useState(false);
@@ -21,19 +22,24 @@ export function AvatarUpload({ profile }: { profile: Profile }) {
             setError("Please select an image file.");
             return;
         }
-        if (file.size > 2 * 1024 * 1024) {
-            setError("Image size should be less than 2MB.");
-            return;
-        }
 
         setError(null);
         setPreviewUrl(URL.createObjectURL(file));
         setIsUploading(true);
 
-        const formData = new FormData();
-        formData.append("file", file);
-
         try {
+            // Compression
+            const options = {
+                maxSizeMB: 0.2, // 200KB
+                maxWidthOrHeight: 800,
+                useWebWorker: true,
+            };
+
+            const compressedFile = await imageCompression(file, options);
+            
+            const formData = new FormData();
+            formData.append("file", compressedFile, file.name);
+
             await updateAvatar(formData);
         } catch (err) {
             const message = err instanceof Error ? err.message : "Failed to upload avatar";

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageUploadWidget } from "../image-upload-widget";
 import { Loader2 } from "lucide-react";
 
 export function ProjectForm({ blockId, initialData }: { blockId: string, initialData: ProjectData }) {
@@ -61,16 +62,13 @@ export function ProjectForm({ blockId, initialData }: { blockId: string, initial
                         className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
                     />
                 </div>
-                <div className="space-y-2">
-                    <Label>Image URL (Optional)</Label>
-                    <Input
-                        value={data.imageUrl || ""}
-                        onChange={e => setData({ ...data, imageUrl: e.target.value })}
-                        placeholder="https://example.com/image.jpg"
-                        className="bg-muted border-input text-foreground focus-visible:ring-accent-brand"
-                    />
-                </div>
             </div>
+
+            <ImageUploadWidget
+                label="Project Thumbnail"
+                value={data.imageUrl}
+                onChange={url => setData({ ...data, imageUrl: url })}
+            />
 
             <div className="space-y-2">
                 <Label>Tags (Comma separated)</Label>

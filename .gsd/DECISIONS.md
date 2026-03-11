@@ -112,3 +112,21 @@
 ### Constraints
 - Must maintain ultra-minimalist aesthetic.
 - Branding must be consistent with `[ IDCV ] Identity Canvas` and `idcv.me`.
+
+## Phase 2 (v1.2) Decisions
+
+**Date:** 2026-03-11
+
+### Scope
+- Optimize all image types (avatars, project thumbnails, image blocks).
+- Target 90+ Lighthouse on public profiles, prioritizing LCP.
+- No migration of existing images; applies to new uploads only.
+
+### Approach
+- Chose: Option A (Client-side compression before upload).
+- Details: Max ~800px / 200KB compression before uploading to Supabase Storage.
+- Standard pattern: Use `next/image` with `fill` + `object-cover` for all dynamic images.
+- Configuration: Add Supabase domain to `remotePatterns` in Next.js config.
+
+### Constraints
+- Ensure layouts do not break with the `fill` + `object-cover` pattern.
