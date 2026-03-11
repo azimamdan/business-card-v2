@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [ IDCV ] Identity Canvas
 
-## Getting Started
+> Your Digital Identity, Reimagined.
 
-First, run the development server:
+A mobile-first web app where professionals, freelancers, and developers can build a modular, customizable identity page — serving as a living resume, portfolio, and contact card — published to a unique public URL.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+🌐 **Live:** [identitycanvas.netlify.app](https://identitycanvas.netlify.app)
+
+---
+
+## Features
+
+- **Modular Blocks** — Build your page using Hero/Bio, V-Card, Project Card, and Markdown blocks
+- **Add to Contacts** — Seamless `.vcf` download for instant contact saving on mobile
+- **Dual Theme** — Dark (default) and Light mode with user-customizable accent colors
+- **Live Editor** — Side-by-side desktop editor with mobile tab layout
+- **Drag & Drop** — Reorder blocks with `@dnd-kit`
+- **Avatar Upload** — Direct upload to Supabase Storage with client-side compression
+- **Public Profile** — Shareable at `identitycanvas.netlify.app/[username]`
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS + shadcn/ui |
+| Auth & Database | Supabase (Auth, Postgres, RLS) |
+| Storage | Supabase Storage |
+| Animations | Framer Motion |
+| Forms | react-hook-form + Zod |
+| Deployment | Netlify |
+
+---
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── [username]/       # Public profile route
+│   ├── dashboard/        # Profile editor
+│   ├── login/            # Auth pages
+│   └── signup/
+├── components/
+│   └── blocks/           # HeroBlock, VCardBlock, ProjectBlock, MarkdownBlock
+├── lib/
+│   └── actions/          # Server Actions (profiles, blocks)
+└── supabase/             # DB schema and migrations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Milestones
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Version | Description |
+|---------|-------------|
+| v1.1 | Core product — Auth, Blocks, Editor, Themes, Drag & Drop |
+| v1.2 | Polish — Minimalist landing page, image optimization, mobile UX |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Copyright
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+© 2026 Azim Amdan. All rights reserved.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project and its source code are proprietary. No part of this codebase may be used, copied, modified, or distributed without explicit written permission from the author.
