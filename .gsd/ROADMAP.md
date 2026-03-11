@@ -1,80 +1,18 @@
 # ROADMAP.md
 
-> **Current Phase**: Phase 6 — Project Update
-> **Milestone**: v1.1
+> **Current Phase**: Phase 1 — v1.2 Planning
+> **Milestone**: v1.2
 
 ## Must-Haves (from SPEC)
-- [ ] User authentication (Supabase Auth)
-- [ ] Dynamic routing `/[username]`
-- [ ] Modular Block System (Hero, V-Card, Project, Markdown)
-- [ ] Profile editing interface
-- [ ] "Add to Contacts" (.vcf) generation
-- [ ] Dark Mode premium aesthetic (Linear-style)
+- [ ] Refine Minimalist Landing Page
+- [ ] Image optimization for uploaded avatars
+- [ ] Final mobile-first responsiveness polish
 
 ## Phases
 
-### Phase 1: Foundation & Identity
-**Status**: ✅ Completed (2026-02-21)
-**Objective**: Set up the core project structure, auth, database schema, and dynamic routing.
-- Initialize Next.js project with Tailwind and shadcn/ui.
-- Supabase integration (Client, Auth, Database, RLS).
-- Schema: `profiles` table (linked to `auth.uid()`) and `blocks` table (`JSONB` data).
-- Auth plumbing: sign-up/login pages, middleware for protected routes.
-- Minimal landing page at `/` with "Get Started" CTA.
-- Dynamic `/[username]` route with reserved slugs validation.
-- Seed demo profile with sample blocks for visual testing.
-
-### Phase 2: The Canvas Ecosystem (Blocks)
-**Status**: ✅ Completed (2026-02-22)
-**Objective**: Build the core rendering engine and the first set of functional blocks.
-- **Hero/Bio Block**: Visual identity and introduction.
-- **V-Card Block**: Backend logic for .vcf generation and download.
-- **Project Card**: Component for showcasing GitHub repos/portfolios.
-- **Markdown Block**: Flexible text area for storytelling/resume.
-
-### Phase 3: The Profile Editor
-**Status**: ✅ Completed (2026-02-22)
-**Objective**: Create the authenticated dashboard where users manage their identity.
-- Dashboard shell with auth guard and onboarding flow.
-- Side-by-side editor (form left, live preview right; tabs on mobile).
-- Profile settings: display name, bio, accent color, slug editing, avatar upload (Supabase Storage).
-- Block management: add, edit data, delete, reorder (up/down), show/hide toggle.
-- Publish/Unpublish toggle (Draft → Live workflow).
-- "View Public Profile" + "Copy Link" shortcuts.
-- Server Actions for all CRUD. react-hook-form + zod for validation.
-
-### Phase 4: Polish & Performance
-**Status**: ✅ Complete
-**Goal**: Transform from functional to premium with animations and performance optimization.
-
-**Focus Areas:**
-- Framer Motion micro-interactions
-- `next/image` optimization
-- Mobile responsiveness audit
-- Loading skeletons (Image optimization, hydration checks).
-- Final mobile-first responsiveness audit.
-
-### Phase 5: Gap Closure & Documentation
-**Status**: ✅ Completed (2026-02-22)
-**Objective**: Address gaps from milestone audit and consolidate project records.
-- Consolidate Phase 1 & 3 verification reports into `.gsd/phases/`.
-- Implement drag-and-drop reordering for blocks (UX refinement).
-- Verify hydration consistency for dynamic accent colors.
-
-### Phase 6: Project Update
-**Status**: ✅ Completed
-**Objective**: The New Identity ([ IDCV ] Identity Canvas), Visual & Copy Refinement (Triple-Theme, Fonts), Global Updates, Feature Adjustments & SEO, Implementation Task.
-**Depends on**: Phase 5
-
-**Plans** (6 plans, 4 waves):
-- [x] 6.1: Theme Infrastructure & Provider (wave 1)
-- [x] 6.2: Theme Switcher Component (wave 1)
-- [x] 6.3: Hardcoded Color Migration — Pages (wave 2)
-- [x] 6.4: Hardcoded Color Migration — Components + Branding (wave 2)
-- [x] 6.5: Logo, Favicon & Skeleton Loaders (wave 3)
-- [x] 6.6: SEO Metadata & Final Polish (wave 4)
-
-**Verification**:
-- `npm run build` passes
-- All three themes render correctly in all views
-- No user-facing "Canvas" text, all domain refs show "idcv.me/"
+### Phase 1: v1.2 Planning & Cleanup
+**Status**: 🗓️ Not Started
+**Objective**: Plan the next iteration focusing on the minimalist pivot and closing technical debt from v1.1.
+- Audit mobile responsiveness of the simplified landing page.
+- Research optimal image processing for Supabase Storage uploads.
+- Define new Phase 7 (Pivot) goals.
